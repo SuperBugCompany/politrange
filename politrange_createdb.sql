@@ -10,9 +10,9 @@ create table Persons (
 ) character set utf8;
 
 create table Keywords (
-  ID       	int     			  not null 	auto_increment,
-  Name     	varchar(2048)	  not null,
-  PersonID  int 		    	  not null,
+  ID        int             not null   auto_increment,
+  Name      varchar(2048)   not null,
+  PersonID  int             not null,
   
   primary key   (ID),
   foreign key   (PersonID) references Persons(ID) 
