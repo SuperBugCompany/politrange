@@ -3,7 +3,7 @@ create database politrange;
 use politrange;                                              
 
 create table Persons (
-  ID 			  int     		    not null 	auto_increment, 
+  ID        int     		    not null 	auto_increment, 
   Name      varchar(2048) 	not null	,
 
   primary key   (ID)
