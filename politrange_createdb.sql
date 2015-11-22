@@ -19,27 +19,27 @@ create table Keywords (
 ) character set utf8;
 
 create table Sites (
-  ID    		int 			      not null 	auto_increment,
-  Name    	varchar(2048) 	not null,
+  ID        int             not null   auto_increment,
+  Name      varchar(2048)   not null,
   
   primary key   (ID)
 ) character set utf8;
 
 create table Pages (
-  ID     		    int 			      not null 	auto_increment,
-  URL    		    nvarchar(2048) 	not null,
-  SiteID 		    int  			      not null,
-  FoundDateTime datetime        not null,
-  LastScanDate 	datetime        not null,
+  ID            int            not null 	auto_increment,
+  URL           nvarchar(2048) not null,
+  SiteID        int            not null,
+  FoundDateTime datetime       not null,
+  LastScanDate  datetime       not null,
   
   primary key   (ID),
   foreign key   (SiteID) references Sites(ID)  
 ) character set utf8;
 
 create table PersonPageRank (
-  PersonID 	int 			      not null,
-  PageID    int 			      not null,
-  Rank   		int   			    not null,
+  PersonID    int             not null,
+  PageID      int             not null,
+  Rank        int             not null,
   
   primary key   (PersonID),
   foreign key   (PersonID) 	references Persons(ID),
@@ -50,16 +50,16 @@ create table PersonPageRank (
 -- пользователи...
 
 create table Roles (
-  ID     		int 			      not null 	auto_increment,
-  Role    	varchar(2048) 	not null,
+  ID        int             not null  auto_increment,
+  Role      varchar(2048)   not null,
   
   primary key   (Id)
 ) character set utf8;
 
 create table Users (
-  ID  			int        			not null 	auto_increment,
-  Name    	varchar(2048) 	not null,
-  RoleId   	int			 	      not null,	
+  ID        int             not null  auto_increment,
+  Name      varchar(2048)   not null,
+  RoleId    int             not null,	
   
   primary key   (ID),
   foreign key   (RoleId) references Roles(ID)
