@@ -42,8 +42,8 @@ create table PersonPageRank (
   Rank        int             not null,
   
   primary key   (PersonID),
-  foreign key   (PersonID) 	references Persons(ID),
-  foreign key   (PageID) 	  references Pages(ID) 
+  foreign key   (PersonID)    references Persons(ID),
+  foreign key   (PageID)      references Pages(ID) 
 ) character set utf8;
 
 -- создание остальных таблиц ...
