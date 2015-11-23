@@ -3,6 +3,8 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Owin;
+using SuperBug.Politrange.Data;
+using SuperBug.Politrange.Services;
 
 namespace SuperBug.Politrange.Api
 {
@@ -28,6 +30,8 @@ namespace SuperBug.Politrange.Api
 
 		private static void RegisterComponents(ContainerBuilder builder)
 		{
+		    builder.RegisterModule<DataModule>();
+		    builder.RegisterModule<ServiceModule>();
 
 		}
 	}
