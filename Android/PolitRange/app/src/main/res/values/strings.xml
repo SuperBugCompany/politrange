@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">PolitRange</string>
+    <string-array name="site">
+        <item>Lenta.ru</item>
+        <item>Rbc.ru</item>
+        <item>Tass.ru</item>
+    </string-array>
+    <array name="logos">
+        <item>@drawable/ic_lenta</item>
+        <item>@drawable/ic_rbc</item>
+        <item>@drawable/ic_tass</item>
+    </array>
+
+    <string-array name="urls">
+        <item>http://lenta.ru/</item>
+        <item>http://www.rbc.ru/</item>
+        <item>http://tass.ru/</item>
+    </string-array>
+    <string name="apply">Применить</string>
+    <string name="general">Общая статистика</string>
+    <string name="daily">Ежедневная статистика</string>
+    <string name="stat_title">Статистика:</string>
+    <string name="period">Период:</string>
+    <string name="since">с</string>
+    <string name="till">по</string>
+
+    <string-array name="person">
+        <item>Путин</item>
+        <item>Медведев</item>
+        <item>Навальный</item>
+    </string-array>
+    <string-array name="rangeL">
+        <item>100500</item>
+        <item>5000</item>
+        <item>2350</item>
+    </string-array>
+    <string-array name="rangeR">
+        <item>34670</item>
+        <item>4390</item>
+        <item>1238</item>
+    </string-array>
+    <string-array name="rangeT">
+        <item>54621</item>
+        <item>6375</item>
+        <item>897</item>
+    </string-array>
+    <string name="personTit">Имя</string>
+    <string name="rangeTit">Количество упоминаний</string>
+</resources>
