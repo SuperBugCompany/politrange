@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -19,9 +20,11 @@ import android.widget.TextView;
 
 import com.example.nortti.politrange.Daily.Day;
 import com.example.nortti.politrange.Daily.DayAdapter;
+import com.example.nortti.politrange.General.Gen;
 import com.example.nortti.politrange.R;
 import com.example.nortti.politrange.Site.Site;
 import com.example.nortti.politrange.Site.SiteAdapter;
+import com.example.nortti.politrange.SwitchSpinner;
 
 import java.util.ArrayList;
 
@@ -49,6 +52,9 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     private TextView summInt;
     private ListView dayList;
     private DayAdapter dayAdapter;
+    SwitchSpinner switchSpinner;
+    private Button dayApply;
+    private int Summ;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,6 +71,13 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
             sites.add(site);
         }
 
+        days = new ArrayList<Day>();
+        dayName = getResources().getStringArray(R.array.date);
+        dayIndexL = getResources().getStringArray(R.array.drangeL);
+        dayIndexR = getResources().getStringArray(R.array.drangeR);
+        dayIndexT = getResources().getStringArray(R.array.drangeT);
+        dayApply = (Button) v.findViewById(R.id.butApply);
+        dayApply.setOnClickListener(this);
         header = inflater.inflate(R.layout.day_head, null);
         footer = inflater.inflate(R.layout.day_foot, null);
         summInt = (TextView) footer.findViewById(R.id.summInt);
@@ -96,8 +109,21 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        switch (position)
+        {
+            case 0:
 
+                switchSpinner = new SwitchSpinner(dayName,dayIndexL);
+
+                break;
+            case 1:
+                switchSpinner = new SwitchSpinner(dayName,dayIndexR);
+                break;
+            case 2:
+                switchSpinner = new SwitchSpinner(dayName,dayIndexT);
+                break;
+        }
     }
 
     @Override
@@ -116,6 +142,17 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
             case R.id.butTo:
                 ToDate toDate = new ToDate();
                 toDate.show(getFragmentManager(),"datePicker");
+                break;
+            case R.id.butApply:
+
+                days.clear();
+                dayList.setAdapter(dayAdapter);
+
+                for (int a = 0; a < dayName.length; a++)
+                {
+                    Day day = new Day(switchSpinner.getName()[a], switchSpinner.getIndex()[a]);
+                    days.add(day);
+                }
                 break;
         }
     }

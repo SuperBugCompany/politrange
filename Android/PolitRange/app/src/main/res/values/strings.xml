@@ -44,6 +44,26 @@
         <item>6375</item>
         <item>897</item>
     </string-array>
+    <string-array name="drangeL">
+        <item>10050</item>
+        <item>500</item>
+        <item>235</item>
+    </string-array>
+    <string-array name="drangeR">
+        <item>3467</item>
+        <item>439</item>
+        <item>123</item>
+    </string-array>
+    <string-array name="drangeT">
+        <item>5462</item>
+        <item>637</item>
+        <item>89</item>
+    </string-array>
+    <string-array name="date">
+        <item>11.09.2014</item>
+        <item>23.06.2015</item>
+        <item>03.11.2015</item>
+    </string-array>
     <string name="personTit">Имя</string>
     <string name="rangeTit">Количество упоминаний</string>
     <string name="dateTit">Дата</string>

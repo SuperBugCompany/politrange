@@ -36,8 +36,6 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
     private String[] genIndexL;
     private String[] genIndexR;
     private String[] genIndexT;
-    String[] Index;
-    String[] Name;
     SwitchSpinner switchSpinner;
     private ListView genList;
     private GenAdapter genAdapter;
@@ -94,7 +92,9 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
         switch (position)
         {
             case 0:
+
                 switchSpinner = new SwitchSpinner(genName,genIndexL);
+
                 break;
             case 1:
                 switchSpinner = new SwitchSpinner(genName,genIndexR);
@@ -105,8 +105,7 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
         }
     }
 
-
-    @Override
+   @Override
     public void onNothingSelected(AdapterView<?> parent)
     {
 
@@ -126,7 +125,7 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
 
                 for (int a = 0; a < genName.length; a++)
                 {
-                    Gen gen = new Gen(Name[a], Index[a]);//ToDo исправить ошибку (ХЗ откуда вылезшую)
+                    Gen gen = new Gen(switchSpinner.getName()[a], switchSpinner.getIndex()[a]);
                     gens.add(gen);
                 }
                 break;
