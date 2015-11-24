@@ -49,12 +49,13 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     private String[] dayIndexL;
     private String[] dayIndexR;
     private String[] dayIndexT;
-    private TextView summInt;
+    private TextView sumInt;
     private ListView dayList;
     private DayAdapter dayAdapter;
     SwitchSpinner switchSpinner;
     private Button dayApply;
     private int Summ;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,7 +81,8 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
         dayApply.setOnClickListener(this);
         header = inflater.inflate(R.layout.day_head, null);
         footer = inflater.inflate(R.layout.day_foot, null);
-        summInt = (TextView) footer.findViewById(R.id.summInt);
+        sumInt = (TextView) footer.findViewById(R.id.summInt);
+
 
         frame1 = (FrameLayout) v.findViewById(R.id.frame1);
         butSince = (ImageButton) frame1.findViewById(R.id.butSince);
@@ -145,14 +147,18 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
                 break;
             case R.id.butApply:
 
+                Summ = 0;
                 days.clear();
                 dayList.setAdapter(dayAdapter);
 
                 for (int a = 0; a < dayName.length; a++)
                 {
                     Day day = new Day(switchSpinner.getName()[a], switchSpinner.getIndex()[a]);
+                    int b = Integer.parseInt(switchSpinner.getIndex()[a]);
+                    Summ +=b;
                     days.add(day);
                 }
+                sumInt.setText(String.valueOf(Summ));
                 break;
         }
     }
