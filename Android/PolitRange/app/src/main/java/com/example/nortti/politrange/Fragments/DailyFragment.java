@@ -1,30 +1,33 @@
 package com.example.nortti.politrange.Fragments;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.example.nortti.politrange.Daily.Day;
+import com.example.nortti.politrange.Daily.DayAdapter;
 import com.example.nortti.politrange.R;
 import com.example.nortti.politrange.Site.Site;
 import com.example.nortti.politrange.Site.SiteAdapter;
 
 import java.util.ArrayList;
 
-public class DailyFragment extends Fragment implements OnClickListener {
+public class DailyFragment extends Fragment implements OnClickListener,OnItemSelectedListener {
     private ArrayList<Site> sites;
+    private ArrayList<Day> days;
     private Spinner spinner;
     private FrameLayout frame1;
     private FrameLayout frame2;
@@ -36,12 +39,16 @@ public class DailyFragment extends Fragment implements OnClickListener {
     private String[] siteTitle;
     private String[] siteUrls;
     private TypedArray imgLogo;
-    int DIALOG_DATE = 1;
-    int myYear = 2011;
-    int myMonth = 02;
-    int myDay = 03;
-    String date;
     FragmentTransaction ft;
+    private View header;
+    private View footer;
+    private String[] dayName;
+    private String[] dayIndexL;
+    private String[] dayIndexR;
+    private String[] dayIndexT;
+    private TextView summInt;
+    private ListView dayList;
+    private DayAdapter dayAdapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +64,11 @@ public class DailyFragment extends Fragment implements OnClickListener {
             Site site = new Site(siteTitle[i], siteUrls[i], imgLogo.getResourceId(i, -1));
             sites.add(site);
         }
+
+        header = inflater.inflate(R.layout.day_head, null);
+        footer = inflater.inflate(R.layout.day_foot, null);
+        summInt = (TextView) footer.findViewById(R.id.summInt);
+
         frame1 = (FrameLayout) v.findViewById(R.id.frame1);
         butSince = (ImageButton) frame1.findViewById(R.id.butSince);
         butSince.setOnClickListener(this);
@@ -68,14 +80,30 @@ public class DailyFragment extends Fragment implements OnClickListener {
         butTo.setOnClickListener(this);
         etTo = (EditText) frame2.findViewById(R.id.etTo);
 
+        dayList = (ListView) v.findViewById(R.id.dayList);
+        dayList.addHeaderView(header);
+        dayList.addFooterView(footer);
+
         spinner = (Spinner) v.findViewById(R.id.spinner);
         adapter = new SiteAdapter(getActivity(), sites);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
         imgLogo.recycle();
+
+        dayAdapter = new DayAdapter(getActivity(),days);
 
         return v;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 
     @Override
     public void onClick(View v) {
@@ -91,6 +119,7 @@ public class DailyFragment extends Fragment implements OnClickListener {
                 break;
         }
     }
+
 
 
 }

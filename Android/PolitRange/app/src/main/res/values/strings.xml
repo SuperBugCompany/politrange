@@ -46,4 +46,7 @@
     </string-array>
     <string name="personTit">Имя</string>
     <string name="rangeTit">Количество упоминаний</string>
+    <string name="dateTit">Дата</string>
+    <string name="pageTit">Количество новых страниц</string>
+    <string name="summTit">Всего за период:</string>
 </resources>

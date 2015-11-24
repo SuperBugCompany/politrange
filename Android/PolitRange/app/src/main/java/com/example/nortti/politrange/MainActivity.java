@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         TabHost tabs = (TabHost) findViewById(R.id.tabHost);
 
         tabs.setup();
@@ -28,20 +27,9 @@ public class MainActivity extends AppCompatActivity {
         spec.setIndicator(getResources().getString(R.string.daily));
         tabs.addTab(spec);
 
-
         tabs.setCurrentTab(0);
-        //spinner.setOnItemSelectedListener(this);
+
 
     }
 
-
-    /*@Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }*/
 }

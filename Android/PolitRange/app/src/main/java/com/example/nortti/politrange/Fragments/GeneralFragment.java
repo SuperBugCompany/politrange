@@ -18,10 +18,12 @@ import com.example.nortti.politrange.General.GenAdapter;
 import com.example.nortti.politrange.R;
 import com.example.nortti.politrange.Site.Site;
 import com.example.nortti.politrange.Site.SiteAdapter;
+import com.example.nortti.politrange.SwitchSpinner;
 
 import java.util.ArrayList;
 
-public class GeneralFragment extends Fragment implements OnClickListener, OnItemSelectedListener {
+public class GeneralFragment extends Fragment implements OnClickListener, OnItemSelectedListener
+{
     private ArrayList<Site> sites;
     private ArrayList<Gen> gens;
     private Button genApply;
@@ -30,18 +32,20 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
     private String[] siteTitle;
     private String[] siteUrls;
     private TypedArray imgLogo;
-    private TypedArray imgPerson;
     private String[] genName;
     private String[] genIndexL;
     private String[] genIndexR;
     private String[] genIndexT;
     String[] Index;
+    String[] Name;
+    SwitchSpinner switchSpinner;
     private ListView genList;
     private GenAdapter genAdapter;
     private View header;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
 
         View v = inflater.inflate(R.layout.general_fragment, null);
 
@@ -50,11 +54,12 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
         siteUrls = getResources().getStringArray(R.array.urls);
         imgLogo = getResources().obtainTypedArray(R.array.logos);
 
-        for (int i = 0; i < siteTitle.length; i++) {
+        for (int i = 0; i < siteTitle.length; i++)
+        {
             Site site = new Site(siteTitle[i], siteUrls[i], imgLogo.getResourceId(i, -1));
             sites.add(site);
         }
-        header = inflater.inflate(R.layout.gen_tit, null);
+        header = inflater.inflate(R.layout.gen_head, null);
 
         spinner = (Spinner) v.findViewById(R.id.spinner);
         siteAdapter = new SiteAdapter(getActivity(), sites);
@@ -84,44 +89,46 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
 
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (position) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
+        switch (position)
+        {
             case 0:
-                switchSpinner(genIndexL);
+                switchSpinner = new SwitchSpinner(genName,genIndexL);
                 break;
             case 1:
-                switchSpinner(genIndexR);
+                switchSpinner = new SwitchSpinner(genName,genIndexR);
                 break;
             case 2:
-                switchSpinner(genIndexT);
+                switchSpinner = new SwitchSpinner(genName,genIndexT);
                 break;
         }
     }
 
+
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent)
+    {
 
     }
 
-    public void switchSpinner(String[] Index) {
-        this.Index = Index;
 
-    }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.genApply:
-                //imgPerson.recycle();
+
                 gens.clear();
                 genList.setAdapter(genAdapter);
 
-                for (int a = 0; a < genName.length; a++) {
-                    Gen gen = new Gen(genName[a], Index[a]);
+                for (int a = 0; a < genName.length; a++)
+                {
+                    Gen gen = new Gen(Name[a], Index[a]);//ToDo исправить ошибку (ХЗ откуда вылезшую)
                     gens.add(gen);
                 }
-                //Toast.makeText(getActivity(),"genApply clicked",Toast.LENGTH_SHORT).show();
-
                 break;
         }
     }
