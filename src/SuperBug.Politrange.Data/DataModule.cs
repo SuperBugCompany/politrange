@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using SuperBug.Politrange.Data.Contexts;
+using SuperBug.Politrange.Data.Repositories;
 
 namespace SuperBug.Politrange.Data
 {
@@ -6,7 +8,10 @@ namespace SuperBug.Politrange.Data
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			base.Load(builder);
+		    builder.RegisterType<PolitrangeContext>().As<IPolitrangeContext>();
+
+		    builder.RegisterType<SiteRepository>().As<ISiteRepository>();
+
 		}
 	}
 }
