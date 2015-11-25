@@ -3,8 +3,13 @@ using SuperBug.Politrange.Models;
 
 namespace SuperBug.Politrange.Data.Contexts
 {
-    public class PolitRangeContext: DbContext
+    public class PolitrangeContext: DbContext, IPolitrangeContext
     {
+        public PolitrangeContext()
+            : base("PolitrangeContext")
+        {
+        }
+
         public DbSet<Keyword> Keywords { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<PersonPageRank> PersonPageRanks { get; set; }
