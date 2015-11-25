@@ -30,9 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\Users\Gilga\AppData\Roaming\NuGet\Packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Autofac">
+      <HintPath>..\..\lib\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,10 +44,23 @@
   <ItemGroup>
     <Compile Include="ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sites\ISiteService.cs" />
+    <Compile Include="Sites\SiteService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SuperBug.Politrange.Data\SuperBug.Politrange.Data.csproj">
+      <Project>{748B0458-C5D6-4937-911A-2AAD32FD25EB}</Project>
+      <Name>SuperBug.Politrange.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SuperBug.Politrange.Models\SuperBug.Politrange.Models.csproj">
+      <Project>{E62D4F5C-009B-4FCF-B20D-ECE9B17AC336}</Project>
+      <Name>SuperBug.Politrange.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

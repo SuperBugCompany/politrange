@@ -53,11 +53,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModule.cs" />
+    <Compile Include="Contexts\PolitrangeContext.cs" />
+    <Compile Include="Contexts\IPolitrangeContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ISiteRepository.cs" />
+    <Compile Include="Repositories\SiteRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SuperBug.Politrange.Models\SuperBug.Politrange.Models.csproj">
+      <Project>{E62D4F5C-009B-4FCF-B20D-ECE9B17AC336}</Project>
+      <Name>SuperBug.Politrange.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
