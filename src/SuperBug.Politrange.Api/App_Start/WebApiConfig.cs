@@ -13,7 +13,7 @@ namespace SuperBug.Politrange.Api
 
 			config.Routes.MapHttpRoute(
 			        name: "DefaultApi",
-			        routeTemplate: "api/{controller}/{id}",
+			        routeTemplate: "api/{controller}s/{id}",
 			        defaults: new { id = RouteParameter.Optional }
 				);
 
