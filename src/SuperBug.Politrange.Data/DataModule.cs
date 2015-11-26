@@ -11,7 +11,7 @@ namespace SuperBug.Politrange.Data
 		    builder.RegisterType<PolitrangeContext>().As<IPolitrangeContext>();
 
 		    builder.RegisterType<SiteRepository>().As<ISiteRepository>();
-
+		    builder.RegisterType<StatRepository>().As<IStatRepository>();
 		}
 	}
 }

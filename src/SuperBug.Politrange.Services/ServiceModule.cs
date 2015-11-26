@@ -9,6 +9,7 @@ namespace SuperBug.Politrange.Services
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<SiteService>().As<ISiteService>();
+            builder.RegisterType<StatService>().As<IStatService>();
         }
     }
 }
