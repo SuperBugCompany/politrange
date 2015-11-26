@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
+using AutoMapper;
+using SuperBug.Politrange.Api.Models.ViewModels;
+using SuperBug.Politrange.Models;
 using SuperBug.Politrange.Services.States;
 
 namespace SuperBug.Politrange.Api.Controllers
@@ -15,9 +19,11 @@ namespace SuperBug.Politrange.Api.Controllers
 
         public IHttpActionResult GetStatBySiteId(int id)
         {
-            var ratings = statService.GetPageRanksBySite(id);
+            IEnumerable<PersonPageRank> ratings = statService.GetPageRanksBySite(id);
 
-            return Ok(ratings);
+            var ratingsViewModel = Mapper.Map<IEnumerable<PersonPageRank>, IEnumerable<CommonStatViewModel>>(ratings);
+
+            return Ok(ratingsViewModel);
         }
     }
 

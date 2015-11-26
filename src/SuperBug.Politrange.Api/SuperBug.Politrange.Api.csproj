@@ -152,6 +152,10 @@
     <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SuperBug.Politrange.Api.Models\SuperBug.Politrange.Api.Models.csproj">
+      <Project>{039F7A39-67B3-4934-8A4C-5660EA44F140}</Project>
+      <Name>SuperBug.Politrange.Api.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SuperBug.Politrange.Data\SuperBug.Politrange.Data.csproj">
       <Project>{748B0458-C5D6-4937-911A-2AAD32FD25EB}</Project>
       <Name>SuperBug.Politrange.Data</Name>

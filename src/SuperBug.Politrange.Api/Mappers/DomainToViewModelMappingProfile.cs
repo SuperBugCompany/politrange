@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using SuperBug.Politrange.Api.Models.ViewModels;
+using SuperBug.Politrange.Models;
 
 namespace SuperBug.Politrange.Api.Mappers
 {
@@ -6,6 +8,7 @@ namespace SuperBug.Politrange.Api.Mappers
 	{
 		protected override void Configure()
 		{
+		    Mapper.CreateMap<PersonPageRank, CommonStatViewModel>();
 		}
 	}
 }
