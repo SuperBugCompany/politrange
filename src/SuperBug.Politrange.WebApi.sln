@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperBug.Politrange.Data", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperBug.Politrange.Models", "SuperBug.Politrange.Models\SuperBug.Politrange.Models.csproj", "{E62D4F5C-009B-4FCF-B20D-ECE9B17AC336}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{12425D4E-91B0-41A5-8358-4F7F77A3DABF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperBug.Politrange.Service.UnitTest", "SuperBug.Politrange.Service.UnitTest\SuperBug.Politrange.Service.UnitTest.csproj", "{A0B7AFC6-BC4C-421B-9E60-49238F23A63A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +43,15 @@ Global
 		{E62D4F5C-009B-4FCF-B20D-ECE9B17AC336}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E62D4F5C-009B-4FCF-B20D-ECE9B17AC336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E62D4F5C-009B-4FCF-B20D-ECE9B17AC336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B7AFC6-BC4C-421B-9E60-49238F23A63A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B7AFC6-BC4C-421B-9E60-49238F23A63A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B7AFC6-BC4C-421B-9E60-49238F23A63A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B7AFC6-BC4C-421B-9E60-49238F23A63A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A0B7AFC6-BC4C-421B-9E60-49238F23A63A} = {12425D4E-91B0-41A5-8358-4F7F77A3DABF}
 	EndGlobalSection
 EndGlobal
