@@ -80,26 +80,26 @@ namespace ListUrlsJneGenerate
             // получаем в цикле html
             // извлекаем статистические данные
             // записываем в массив
-            List<string> htmls = new List<string>();
+            List<Paragraf> htmls = new List<Paragraf>();
+
             foreach (var item in listContentPages)
             {
                 string html = DownloadHtml(item, Encoding.UTF8);
                 var paragraf = GetParagrafs(html);
-                htmls.Add(paragraf);
+                htmls.Add(new Paragraf(item, paragraf));
             }
 
             Console.WriteLine(htmls.Count + ": кол-во элементов в списке htmls (должен соотвествовать по длине предыдущему)");
 
-
-            foreach (var item in htmls)
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (var item in htmls)
+            //{
+            //    Console.WriteLine("{0}  {1}", item.Link, item.Body);
+            //}
 
             List<Element> listElements = new List<Element>();
-            foreach (var item in htmls)
+            foreach (var pair in htmls)
             {
-                var liel = ListElement(keys, item);
+                var liel = ListElement(keys, pair.Body, pair.Link);
                 listElements.AddRange(liel);
             }
 
@@ -107,10 +107,10 @@ namespace ListUrlsJneGenerate
 
             Console.ReadKey();
 
-            foreach (var item in listElements)
-            {
-                Console.WriteLine(item.ToString());
-            }
+            //foreach (var item in listElements)
+            //{
+            //    Console.WriteLine(item.ToString());
+            //}
 
             using (FileStream fs = new FileStream(@"D:\Log.txt", FileMode.Append))
             {
@@ -248,7 +248,7 @@ namespace ListUrlsJneGenerate
 
         // на вход принимает массив ключей и ЧТМЛ,
         // возвращает объект
-        static List<Element> ListElement(string [] keys, string html)
+        static List<Element> ListElement(string [] keys, string html, string link)
         {
             List<Element> lel = new List<Element>();
 
@@ -259,10 +259,8 @@ namespace ListUrlsJneGenerate
                 var result = (from t in iteams
                               where t.ToLower().Contains(item.ToLower())
                               select t).Count<string>();
-                lel.Add(new Element("url", item, result));
-
+                lel.Add(new Element(link, item, result));
             }
-
             return lel;
         } 
 
