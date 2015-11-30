@@ -12,17 +12,11 @@ namespace Crawler
 {
     class Program
     {
-
-
-
         static void Main(string[] args)
         {
 
             DBConnect dbConnect = new DBConnect();
             var keys = dbConnect.Select();
-
-
-
 
             string baseUrl = "http://lenta.ru/";
             string url = "";
@@ -106,7 +100,7 @@ namespace Crawler
             //    Console.WriteLine("{0}  {1}", item.Link, item.Body);
             //}
 
-            List<Person> listElements = new List<Person>();
+            List<Keyword> listElements = new List<Keyword>();
             foreach (var pair in htmls)
             {
                 var liel = ListElement(keys, pair.Body, pair.Link);
@@ -258,9 +252,9 @@ namespace Crawler
 
         // на вход принимает массив ключей и ЧТМЛ,
         // возвращает объект
-        static List<Person> ListElement(List<string> keys, string html, string link)
+        static List<Keyword> ListElement(List<string> keys, string html, string link)
         {
-            List<Person> lel = new List<Person>();
+            List<Keyword> lel = new List<Keyword>();
 
             string[] iteams = html.Split(new char[] { ' ', ',', '.' });
 
@@ -269,7 +263,7 @@ namespace Crawler
                 var result = (from t in iteams
                               where t.ToLower().Contains(item.ToLower())
                               select t).Count<string>();
-                lel.Add(new Person(link, item, result));
+                lel.Add(new Keyword(link, item, result));
             }
             return lel;
         } 
