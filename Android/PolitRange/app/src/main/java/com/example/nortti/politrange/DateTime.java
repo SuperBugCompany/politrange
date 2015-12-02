@@ -1,5 +1,4 @@
 package com.example.nortti.politrange;
 
-public class Statistic {
-
+public class DateTime {
 }
