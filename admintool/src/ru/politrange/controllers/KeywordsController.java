@@ -1,4 +1,6 @@
 package ru.politrange.controllers;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,8 +15,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ru.politrange.interfaces.impls.CollectionKeywordsCatalog;
-import ru.politrange.interfaces.impls.CollectionPersonsCatalog;
+import ru.politrange.interfaces.ICatalog;
+import ru.politrange.interfaces.impls.KeywordsCatalog;
 import ru.politrange.objects.Keyword;
 import ru.politrange.objects.Person;
 import ru.politrange.utils.DialogManager;
@@ -25,8 +27,8 @@ import java.io.IOException;
  * Created by msv on 23.11.2015.
  */
 public class KeywordsController {
-    private CollectionPersonsCatalog personsCatalog;
-    private CollectionKeywordsCatalog keywordsCatalogImpl;
+    private ICatalog personsCatalogImpl;
+    private ICatalog keywordsCatalogImpl;
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private Parent fxmlEdit;
     private EditKeywordController editKeywordController;
@@ -46,8 +48,15 @@ public class KeywordsController {
     private void initialize() {
         columnName.setCellValueFactory(new PropertyValueFactory<Keyword, String>("name"));
         initListeners();
-        fillDataComBoxPersons();
         initLoader();
+    }
+
+    // #solid_o
+    // keywordsCatalogImpl, personsCatalogImpl это DataSource
+    // нициализировать возможно только через setter
+    public void setDataSource(ICatalog personsCatalogImpl) {
+        this.personsCatalogImpl = personsCatalogImpl;
+        fillDataComBoxPersons();
     }
 
     // #good_code_4 методы не пергружены логикой
@@ -62,12 +71,19 @@ public class KeywordsController {
             }
         });
     }
+    // возращает каталог список имен личностей
+    public ObservableList<String> getPersonNameList(ObservableList<Person> catalogList) {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        for (Person person : catalogList) {
+            list.add(person.getName());
+        }
+        return list;
+    }
 
     // заполнение таблицы комбобокса личностей
     private void fillDataComBoxPersons() {
-        personsCatalog = new CollectionPersonsCatalog();
-        personsCatalog.fillTestData();
-        comBoxPersons.setItems(personsCatalog.getPersonNameList());
+        personsCatalogImpl.fillTestData();
+        comBoxPersons.setItems(getPersonNameList(personsCatalogImpl.getCatalogList()));
     }
 
     // предзагрузка интерфейса редактирования, чтобы не загружать при каждом нажатии на кнопки
@@ -147,16 +163,16 @@ public class KeywordsController {
     }
     // заполнение таблицы ключевых слов
     private void fillData(Person person) {
-        keywordsCatalogImpl = new CollectionKeywordsCatalog(person);
+        keywordsCatalogImpl = new KeywordsCatalog(person);
         keywordsCatalogImpl.fillTestData();
-        mainTable.setItems(keywordsCatalogImpl.getKeywordList());
+        mainTable.setItems(keywordsCatalogImpl.getCatalogList());
     }
 
     public void actionSelectItem(ActionEvent actionEvent) {
         ComboBox source = (ComboBox)actionEvent.getSource();
         int itemIndex = source.getSelectionModel().getSelectedIndex();
         if (itemIndex != -1) {
-            fillData(personsCatalog.getPersonList().get(itemIndex));
+            fillData((Person) personsCatalogImpl.getCatalogList().get(itemIndex));
         }
     }
 }

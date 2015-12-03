@@ -2,20 +2,18 @@ package ru.politrange.interfaces.impls;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ru.politrange.interfaces.PersonsCatalog;
+import ru.politrange.interfaces.ICatalog;
 import ru.politrange.objects.Person;
-
-import java.util.ArrayList;
 
 /**
  * Created by msv on 24.11.2015.
  */
-public class CollectionPersonsCatalog implements PersonsCatalog{
-
-    private ObservableList<Person> personList = FXCollections.observableArrayList();
+public class PersonsCatalog implements ICatalog<Person> {
+    // т.к. статическое нельзя вынести в интерфейс
+    private ObservableList <Person> catalogList = FXCollections.observableArrayList();
     @Override
     public void add(Person person) {
-        personList.add(person);
+        catalogList.add(person);
     }
 
     // для коллекции не используется, но пригодится для случая, когда данные хранятся в БД и пр.
@@ -26,22 +24,17 @@ public class CollectionPersonsCatalog implements PersonsCatalog{
 
     @Override
     public void delete(Person person) {
-        personList.remove(person);
+        catalogList.remove(person);
     }
 
-    public ObservableList<Person> getPersonList() {
-        return personList;
+    public ObservableList<Person> getCatalogList() {
+        return catalogList;
     }
-    public ObservableList<String> getPersonNameList() {
-        ObservableList<String> list = FXCollections.observableArrayList();
-        for (Person person : personList) {
-            list.add(person.getName());
-        }
-        return list;
-    }
+
     public void fillTestData(){
-        personList.add(new Person(1,"Путин"));
-        personList.add(new Person(2,"Медведев"));
-        personList.add(new Person(3,"Навальный"));
+        catalogList.clear();
+        catalogList.add(new Person(1,"Путин"));
+        catalogList.add(new Person(2,"Медведев"));
+        catalogList.add(new Person(3,"Навальный"));
     }
 }

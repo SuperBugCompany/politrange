@@ -3,11 +3,12 @@ package ru.politrange.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import ru.politrange.interfaces.impls.PersonsCatalog;
+import ru.politrange.interfaces.impls.SitesCatalog;
 import ru.politrange.start.Main;
 
 import java.io.InputStream;
@@ -57,6 +58,7 @@ public class MainController {
         try {
             PersonsController personsController = (PersonsController) replaceSceneContent("../fxml/persons.fxml");
             personsController.setMainStage(mainStage);
+            personsController.setDataSource(new PersonsCatalog());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,6 +67,8 @@ public class MainController {
     public void onLinkKeywords(ActionEvent actionEvent) {
         try {
             KeywordsController keywordsController = (KeywordsController) replaceSceneContent("../fxml/keywords.fxml");
+            keywordsController.setMainStage(mainStage);
+            keywordsController.setDataSource(new PersonsCatalog());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,6 +78,8 @@ public class MainController {
     public void onLinkSites(ActionEvent actionEvent) {
         try {
             SitesController sitesController = (SitesController) replaceSceneContent("../fxml/sites.fxml");
+            sitesController.setMainStage(mainStage);
+            sitesController.setDataSource(new SitesCatalog());
         } catch (Exception e) {
             e.printStackTrace();
         }
