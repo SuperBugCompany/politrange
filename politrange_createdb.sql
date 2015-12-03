@@ -1,4 +1,4 @@
-drop database if exists politrange;
+drop database if exists politrange; 
 create database politrange; 
 use politrange;                                              
 
