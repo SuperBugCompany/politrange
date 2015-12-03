@@ -2,17 +2,17 @@ package ru.politrange.interfaces.impls;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ru.politrange.interfaces.SitesCatalog;
+import ru.politrange.interfaces.ICatalog;
 import ru.politrange.objects.Site;
 
 /**
  * Created by developermsv on 26.11.2015.
  */
-public class CollectionSitesCatalog implements SitesCatalog {
-    private ObservableList<Site> siteList = FXCollections.observableArrayList();
+public class SitesCatalog implements ICatalog<Site> {
+    private ObservableList<Site> catalogList = FXCollections.observableArrayList();
     @Override
     public void add(Site site) {
-        siteList.add(site);
+        catalogList.add(site);
     }
 
     // для коллекции не используется, но пригодится для случая, когда данные хранятся в БД и пр.
@@ -23,16 +23,16 @@ public class CollectionSitesCatalog implements SitesCatalog {
 
     @Override
     public void delete(Site site) {
-        siteList.remove(site);
+        catalogList.remove(site);
     }
 
-    public ObservableList<Site> getSiteList() {
-        return siteList;
+    public ObservableList<Site> getCatalogList() {
+        return catalogList;
     }
     public void fillTestData(){
-        siteList.add(new Site(1, "RBC"));
-        siteList.add(new Site(2, "LENTA.RU"));
-        siteList.add(new Site(3, "MAIL.RU политика"));
+        catalogList.add(new Site(1, "rbc.ru"));
+        catalogList.add(new Site(2, "lenta.ru"));
+        catalogList.add(new Site(3, "mail.ru"));
     }
 
 }

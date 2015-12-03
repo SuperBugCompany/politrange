@@ -13,7 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ru.politrange.interfaces.impls.CollectionPersonsCatalog;
+import ru.politrange.interfaces.ICatalog;
+import ru.politrange.interfaces.impls.PersonsCatalog;
 import ru.politrange.objects.Person;
 import ru.politrange.utils.DialogManager;
 
@@ -24,7 +25,8 @@ import java.io.IOException;
  * #good_code_1 код четко соблюдает конвенцию
  */
 public class PersonsController {
-    private CollectionPersonsCatalog personsCatalogImpl = new CollectionPersonsCatalog();
+
+    private ICatalog personsCatalogImpl;
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private Parent fxmlEdit;
     private EditPersonController editPersonController;
@@ -43,9 +45,17 @@ public class PersonsController {
     private void initialize() {
         columnName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
         initListeners();
-        fillData();
         initLoader();
     }
+
+    // #solid_o
+    // personsCatalogImpl это DataSource
+    // нициализировать возможно только через setter
+    public void setDataSource (ICatalog personsCatalogImpl) {
+        this.personsCatalogImpl = personsCatalogImpl;
+        fillData();
+    }
+
 
     // #good_code_4 методы не пергружены логикой
     // инициализация слушателей по таблице интерфейса
@@ -63,7 +73,7 @@ public class PersonsController {
     // заполнение таблицы интерфейса
     private void fillData() {
         personsCatalogImpl.fillTestData();
-        mainTable.setItems(personsCatalogImpl.getPersonList());
+        mainTable.setItems(personsCatalogImpl.getCatalogList());
     }
 
     // предзагрузка интерфейса редактирования, чтобы не загружать при каждом нажатии на кнопки

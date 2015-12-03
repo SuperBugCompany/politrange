@@ -13,7 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ru.politrange.interfaces.impls.CollectionSitesCatalog;
+import ru.politrange.interfaces.ICatalog;
+import ru.politrange.interfaces.impls.SitesCatalog;
 import ru.politrange.objects.Site;
 import ru.politrange.utils.DialogManager;
 
@@ -23,7 +24,7 @@ import java.io.IOException;
  * Created by developermsv on 24.11.2015.
  */
 public class SitesController {
-    private CollectionSitesCatalog sitesCatalogImpl = new CollectionSitesCatalog();
+    private ICatalog sitesCatalogImpl;
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private Parent fxmlEdit;
     private EditSiteController editSiteController;
@@ -42,8 +43,15 @@ public class SitesController {
     private void initialize() {
         columnName.setCellValueFactory(new PropertyValueFactory<Site, String>("name"));
         initListeners();
-        fillData();
         initLoader();
+    }
+
+    // #solid_o
+    // personsCatalogImpl это DataSource
+    // нициализировать возможно только через setter
+    public void setDataSource (ICatalog sitesCatalogImpl) {
+        this.sitesCatalogImpl = sitesCatalogImpl;
+        fillData();
     }
 
     // #good_code_4 методы не пергружены логикой
@@ -62,7 +70,7 @@ public class SitesController {
     // заполнение таблицы интерфейса
     private void fillData() {
         sitesCatalogImpl.fillTestData();
-        mainTable.setItems(sitesCatalogImpl.getSiteList());
+        mainTable.setItems(sitesCatalogImpl.getCatalogList());
     }
 
     // предзагрузка интерфейса редактирования, чтобы не загружать при каждом нажатии на кнопки
