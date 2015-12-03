@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace rssсclass
-{
+{ 
     [Serializable]
     [XmlRoot(ElementName = "rss")]
     public class RssClass
