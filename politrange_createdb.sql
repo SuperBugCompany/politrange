@@ -9,6 +9,7 @@ create table Persons (
   primary key   (ID)
 ) character set utf8;
 
+
 create table Keywords (
   ID       		int 			not null 	auto_increment,
   Name     		varchar(2048)	not null,
@@ -17,6 +18,11 @@ create table Keywords (
   primary key   (ID),
   foreign key   (PersonID) references Persons(ID) 
 ) character set utf8;
+
+-- 3. таблица PPR
+--   извлечь подстроки с ключевыми словами
+--   сохранить в таблицу PPR
+--   ID
 
 create table Sites (
   ID    		int 			not null 	auto_increment,
@@ -28,9 +34,10 @@ create table Sites (
 create table Pages (
   ID     		int 			not null 	auto_increment,
   URL    		nvarchar(2048) 	not null,
-  SiteID 		int  			not null,
-  FoundDateTime datetime    	not null,
-  LastScanDate 	datetime      	not null,
+  SiteID 		int,
+  CreateDate    datetime,
+  FoundDateTime datetime,
+  LastScanDate 	datetime,
   
   primary key   (ID),
   foreign key   (SiteID) references Sites(ID)  
@@ -45,6 +52,9 @@ create table PersonPageRank (
   foreign key   (PersonID) 	references Persons(ID),
   foreign key   (PageID) 	references Pages(ID) 
 ) character set utf8;
+
+-- создание остальных таблиц ...
+-- пользователи...
 
 create table Roles (
   ID     		int 			not null 	auto_increment,
@@ -64,10 +74,10 @@ create table Users (
 
 
 insert into Persons( ID, Name ) 
-values ('1','Медведев'),('2','Навальный'),('3','Путин');
+values ('1','Медведев'),('2','Навальный'),('3','Путин'),('4','Обама'),('5','Меркель');
 
 insert into Keywords( ID, Name, PersonID ) 
-values ('1','Медведев','1'),('2','Навальный','2'),('3','Путин','3');
+values ('1','Медведев','1'),('2','Навальный','2'),('3','Путин','3'),('4','Обама','4'),('5','Меркель','5');
 
 insert into Sites( ID, Name ) 
 values ('1','http://lenta.ru/'),('2','http://www.gazeta.ru/'),('3','http://www.vedomosti.ru/');
@@ -83,3 +93,8 @@ values ('1','Boss'),('2','Staff');
 
 insert into Users( ID, Name, RoleId ) 
 values ('1','Менеджер', '1'),('2','Аналитик', '2');
+
+
+
+
+
