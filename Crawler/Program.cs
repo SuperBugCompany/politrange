@@ -66,7 +66,8 @@ namespace Crawler
             List<Keyword> listKeyword = new List<Keyword>();
             foreach (var pair in listParagrafs)
             {
-                var keywords = GetListKeyword(keys, pair.Body, pair.Link);
+                KeywordsStatistic keywordsStatistic = new KeywordsStatistic();
+                var keywords = keywordsStatistic.GetKeywordsStatistic(keys, pair.Body, pair.Link);
                 listKeyword.AddRange(keywords);
             }
             return listKeyword;
@@ -77,7 +78,8 @@ namespace Crawler
             List<Paragraf> htmlParagrafs = new List<Paragraf>();
             foreach (var item in listUrlsContentPages)
             {
-                string html = DownloadHtml(item, Encoding.UTF8);
+                DownloadHtmlHelper downloadHtmlHelper = new DownloadHtmlHelper();
+                string html = downloadHtmlHelper.DownloadHtml(item, Encoding.UTF8);
                 var paragraf = GetParagrafs(html);
                 dbConnect.InserttUrlContentPageIntoDatebase(item);
 
@@ -258,49 +260,6 @@ namespace Crawler
         {
             return Regex.Replace(inputString, @"<[^>]*>", String.Empty);
         }
-
-        public static string DownloadHtml(string uri, Encoding encoding)
-        {
-            //WebProxy wp = ParserVirgo.Proxi.WebanetLabsNet.ExecuteProxi(goodUrlsList);
-            //WebProxy wp = new WebProxy("178.215.111.70", 9999);
-
-            // 3 это формирует запрос, который уходит на сервер и обрабаотывается там и выдае ответ.
-            HttpWebRequest request = WebRequest.Create(uri) as HttpWebRequest;
-
-            //request.Proxy = wp;
-
-            request.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 46.0.2490.86 Safari / 537.36";
-            request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*;q=0.8";
-            request.KeepAlive = true;
-
-            // 4 получаем ответ
-            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-
-            // 5 поток данных получаемых с сервера
-            StreamReader sr = new StreamReader(response.GetResponseStream(), encoding);
-            sr.ReadLine();
-            string html = sr.ReadToEnd();
-
-            // 6 получаем чтмл
-            return html;
-        }
-
-
-        static List<Keyword> GetListKeyword(List<string> keys, string html, string link)
-        {
-            List<Keyword> listKeyword = new List<Keyword>();
-
-            string[] iteams = html.Split(new char[] { ' ', ',', '.' });
-
-            foreach (var item in keys)
-            {
-                var result = (from t in iteams
-                              where t.ToLower().Contains(item.ToLower())
-                              select t).Count<string>();
-                listKeyword.Add(new Keyword(link, item, result));
-            }
-            return listKeyword;
-        } 
 
 
 
