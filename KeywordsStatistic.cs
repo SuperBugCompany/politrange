@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Crawler
 {
-    public static class KeywordsStatistic
+    public class KeywordsStatistic
     {
-        public static List<Keyword> GetListKeyword(List<string> keys, string html, string link)
+        public List<Keyword> GetKeywordsStatistic(List<string> keys, string html, string link)
         {
             List<Keyword> listKeyword = new List<Keyword>();
 
@@ -21,6 +21,7 @@ namespace Crawler
                               select t).Count<string>();
                 listKeyword.Add(new Keyword(link, item, result));
             }
+
             return listKeyword;
         }
     }
