@@ -66,7 +66,11 @@ namespace Crawler
             List<Keyword> listKeyword = new List<Keyword>();
             foreach (var pair in listParagrafs)
             {
-                var keywords = KeywordsStatistic.GetListKeyword(keys, pair.Body, pair.Link);
+                KeywordsStatistic keywordsStatistic = new KeywordsStatistic();
+                var keywords = keywordsStatistic.GetKeywordsStatistic(keys, pair.Body, pair.Link);
+
+                //var keywords = KeywordsStatistic.GetListKeyword(keys, pair.Body, pair.Link);
+
                 listKeyword.AddRange(keywords);
             }
             return listKeyword;
