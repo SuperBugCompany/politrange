@@ -10,14 +10,15 @@ import android.widget.TextView;
 
 import com.example.nortti.politrange.General.Gen;
 import com.example.nortti.politrange.R;
+import com.example.nortti.politrange.objects.Person;
 
 import java.util.ArrayList;
 
 public class GenAdapter extends BaseAdapter {
     Context c;
-    private ArrayList<Gen> genItem;
+    private ArrayList<Person> genItem;
 
-    public GenAdapter(Context c, ArrayList<Gen> genItem) {
+    public GenAdapter(Context c, ArrayList<Person> genItem) {
         this.c = c;
         this.genItem = genItem;
     }
@@ -28,7 +29,7 @@ public class GenAdapter extends BaseAdapter {
     }
 
     @Override
-    public Gen getItem(int position) {
+    public Person getItem(int position) {
         return genItem.get(position);
     }
 
@@ -48,13 +49,13 @@ public class GenAdapter extends BaseAdapter {
     }
 
     private void fillView(View v, int position) {
-        final Gen g = getItem(position);
+        final Person p = getItem(position);
 
         TextView tvName = (TextView) v.findViewById(R.id.genName);
-        tvName.setText(g.getGenName());
+        tvName.setText(p.getName());
 
         TextView tvIndex = (TextView) v.findViewById(R.id.genIndex);
-        tvIndex.setText(g.getGenIndex());
+        tvIndex.setText(String.valueOf(p.getRank()));
 
 
     }

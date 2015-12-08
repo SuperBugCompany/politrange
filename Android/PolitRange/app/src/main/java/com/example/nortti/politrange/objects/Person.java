@@ -4,11 +4,14 @@ public class Person {
     private int id;
     private String name;
     private int rank;
+    private int siteId;
+    private Site site;
 
-    public Person(int id, String name, int rank) {
+    public Person(int id, String name, int rank, int siteId) {
         this.id = id;
         this.name = name;
         this.rank = rank;
+        this.siteId = siteId;
     }
     public Person(){};
 
@@ -36,5 +39,19 @@ public class Person {
         this.rank = rank;
     }
 
+    public int getSiteId() {
+        return siteId;
+    }
 
+    public void setSiteId(int siteId) {
+        this.siteId = siteId;
+    }
+
+    public Site getSite() {
+        return site;
+    }
+
+    public void setSite(Site site) {
+        this.site = site;
+    }
 }

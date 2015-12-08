@@ -13,27 +13,32 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.nortti.politrange.R;
+import com.example.nortti.politrange.adapters.GenAdapter;
 import com.example.nortti.politrange.adapters.SiteAdapter;
 import com.example.nortti.politrange.intefaces.ICatalog;
+import com.example.nortti.politrange.intefaces.impls.PersonCatalog;
 import com.example.nortti.politrange.intefaces.impls.SitesCatalog;
+import com.example.nortti.politrange.objects.Site;
 
-public class GeneralFragment extends Fragment implements OnClickListener, OnItemSelectedListener
-{
+public class GeneralFragment extends Fragment implements OnClickListener, OnItemSelectedListener {
 
     private Button genApply;
     private Spinner spinner;
     private ListView genList;
     private View header;
-    private ICatalog sitesCatalogImpl;
+    private ICatalog siteCatalogImpl;
+    private ICatalog personCatalogImpl;
 
 
-    public void setDataSource(ICatalog sitesCatalogImpl) {
-        this.sitesCatalogImpl = sitesCatalogImpl;
-        fillData();
+    public void setSpinnerSource(ICatalog siteCatalogImpl) {
+        this.siteCatalogImpl = siteCatalogImpl;
+        spinData();
     }
+
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.general_fragment, null);
 
         header = inflater.inflate(R.layout.gen_head, null);
@@ -45,37 +50,42 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
 
         genList = (ListView) v.findViewById(R.id.genList);
         genList.addHeaderView(header);
-        setDataSource(new SitesCatalog());
+        setSpinnerSource(new SitesCatalog());
         return v;
     }
 
 
-    private void fillData() {
-        sitesCatalogImpl.fillData();
-        spinner.setAdapter(new SiteAdapter(getActivity(), sitesCatalogImpl.getCatalogList()));
-
-    }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-    {
-
+    private void spinData() {
+        siteCatalogImpl.fillData();
+        spinner.setAdapter(new SiteAdapter(getActivity(), siteCatalogImpl.getCatalogList()));
     }
 
-   @Override
-    public void onNothingSelected(AdapterView<?> parent)
-    {
-
+    private void listData(Site site) {
+        personCatalogImpl = new PersonCatalog(site);
+        personCatalogImpl.fillData();
+        genList.setAdapter(new GenAdapter(getActivity(), personCatalogImpl.getCatalogList()));
     }
+
 
 
 
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        int siteIndex = spinner.getSelectedItemPosition();
+        switch (v.getId()) {
             case R.id.genApply:
-
+               listData((Site)siteCatalogImpl.getCatalogList().get(siteIndex));
                 break;
         }
     }
