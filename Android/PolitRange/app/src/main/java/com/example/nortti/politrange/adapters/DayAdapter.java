@@ -1,4 +1,4 @@
-package com.example.nortti.politrange.Daily;
+package com.example.nortti.politrange.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.nortti.politrange.Daily.Day;
 import com.example.nortti.politrange.General.Gen;
 import com.example.nortti.politrange.R;
 

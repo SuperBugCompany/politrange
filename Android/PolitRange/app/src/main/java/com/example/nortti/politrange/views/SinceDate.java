@@ -1,4 +1,4 @@
-package com.example.nortti.politrange.Fragments;
+package com.example.nortti.politrange.views;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -12,10 +12,8 @@ import com.example.nortti.politrange.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
-public class ToDate extends DialogFragment
-        implements DatePickerDialog.OnDateSetListener{
-
+public class SinceDate extends DialogFragment
+        implements DatePickerDialog.OnDateSetListener {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
@@ -34,7 +32,8 @@ public class ToDate extends DialogFragment
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         String formattedDate = sdf.format(c.getTime());
-        EditText etTo = (EditText) getActivity().findViewById(R.id.etTo);
-        etTo.setText(formattedDate);
+        EditText etSince = (EditText) getActivity().findViewById(R.id.etSince);
+        etSince.setText(formattedDate);
     }
+
 }

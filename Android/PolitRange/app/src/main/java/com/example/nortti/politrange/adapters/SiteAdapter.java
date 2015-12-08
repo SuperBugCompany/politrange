@@ -1,4 +1,4 @@
-package com.example.nortti.politrange.Site;
+package com.example.nortti.politrange.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nortti.politrange.R;
+import com.example.nortti.politrange.objects.Site;
 
 import java.util.ArrayList;
 
