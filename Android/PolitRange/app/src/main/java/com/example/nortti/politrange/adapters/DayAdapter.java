@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.nortti.politrange.Daily.Day;
-import com.example.nortti.politrange.General.Gen;
 import com.example.nortti.politrange.R;
 
 import java.util.ArrayList;
