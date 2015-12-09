@@ -11,10 +11,10 @@ public class Day {
     private int siteId;
     private String dayDateTime;
     private String dayLastScan;
-    private String dayNum;
+    private int dayNum;
     private Site site;
 
-    public Day(int id, String url, int siteId, String dayDateTime, String dayNum) {
+    public Day(int id, String url, int siteId, String dayDateTime, int dayNum) {
         this.id = id;
         this.url = url;
         this.siteId = siteId;
@@ -54,11 +54,11 @@ public class Day {
         this.dayDateTime = dayDateTime;
     }
 
-    public String getDayNum() {
+    public int getDayNum() {
         return dayNum;
     }
 
-    public void setDayNum(String dayNum) {
+    public void setDayNum(int dayNum) {
         this.dayNum = dayNum;
     }
 

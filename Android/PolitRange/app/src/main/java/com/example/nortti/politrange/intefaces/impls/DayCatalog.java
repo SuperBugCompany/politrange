@@ -25,6 +25,6 @@ public class DayCatalog implements ICatalog{
 
     @Override
     public void fillData() {
-
+        catalogList.add(new Day(1,"Lenta.ru",1,"13.11.2015",2467));
     }
 }
