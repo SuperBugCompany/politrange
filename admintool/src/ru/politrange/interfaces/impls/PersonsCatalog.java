@@ -25,6 +25,18 @@ public class PersonsCatalog implements ICatalog<Person> {
 
     @Override
     public void add(Person person) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("siteId", person.getId());
+        jsonObject.put("name", person.getName());
+        try {
+            jsonObject = (JSONObject) new JSONParser().parse(apiAdapter.insert(jsonObject));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        person.setId((int) (long) jsonObject.get("personId"));
+        person.setName((String) jsonObject.get("name"));
         catalogList.add(person);
     }
 
@@ -36,7 +48,13 @@ public class PersonsCatalog implements ICatalog<Person> {
 
     @Override
     public void delete(Person person) {
-        catalogList.remove(person);
+        try {
+            if (apiAdapter.delete(String.valueOf(person.getId()))) {
+                catalogList.remove(person);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ObservableList<Person> getCatalogList() {
@@ -46,7 +64,6 @@ public class PersonsCatalog implements ICatalog<Person> {
     public void populateData() {
         JSONArray jsonObject = null;
         try {
-            //jsonObject = (JSONArray) new JSONParser().parse(webApiAdapter.select(null));
             jsonObject = (JSONArray) new JSONParser().parse(apiAdapter.select(null));
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +75,7 @@ public class PersonsCatalog implements ICatalog<Person> {
         Iterator<JSONObject> iterator = jsonObject.iterator();
         while (iterator.hasNext()) {
             JSONObject o = iterator.next();
-            catalogList.add(new Person(Integer.parseInt(o.get("personId")), o.get("name")));
+            catalogList.add(new Person((int) (long) o.get("personId"), (String) o.get("name")));
         }
     }
 }

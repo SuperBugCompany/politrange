@@ -82,7 +82,7 @@ public class KeywordsController {
 
     // заполнение таблицы комбобокса личностей
     private void fillDataComBoxPersons() {
-        personsCatalogImpl.fillTestData();
+        personsCatalogImpl.populateData();
         comBoxPersons.setItems(getPersonNameList(personsCatalogImpl.getCatalogList()));
     }
 
@@ -164,7 +164,7 @@ public class KeywordsController {
     // заполнение таблицы ключевых слов
     private void fillData(Person person) {
         keywordsCatalogImpl = new KeywordsCatalog(person);
-        keywordsCatalogImpl.fillTestData();
+        keywordsCatalogImpl.populateData();
         mainTable.setItems(keywordsCatalogImpl.getCatalogList());
     }
 

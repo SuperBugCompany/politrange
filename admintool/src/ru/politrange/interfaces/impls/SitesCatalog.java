@@ -29,7 +29,7 @@ public class SitesCatalog implements ICatalog<Site> {
     public ObservableList<Site> getCatalogList() {
         return catalogList;
     }
-    public void fillTestData(){
+    public void populateData(){
         catalogList.add(new Site(1, "rbc.ru"));
         catalogList.add(new Site(2, "lenta.ru"));
         catalogList.add(new Site(3, "mail.ru"));

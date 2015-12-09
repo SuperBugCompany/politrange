@@ -47,7 +47,7 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
         return catalogList;
     }
 
-    public void fillTestData() {
+    public void populateData() {
         catalogList.clear();
         catalogList.add(new Keyword(1, "Путина", 1));
         catalogList.add(new Keyword(2, "Путину", 1));
