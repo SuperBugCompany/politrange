@@ -72,7 +72,7 @@ public class PersonsController {
 
     // заполнение таблицы интерфейса
     private void fillData() {
-        personsCatalogImpl.fillTestData();
+        personsCatalogImpl.populateData();
         mainTable.setItems(personsCatalogImpl.getCatalogList());
     }
 

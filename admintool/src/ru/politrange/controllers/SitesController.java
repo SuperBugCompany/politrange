@@ -69,7 +69,7 @@ public class SitesController {
 
     // заполнение таблицы интерфейса
     private void fillData() {
-        sitesCatalogImpl.fillTestData();
+        sitesCatalogImpl.populateData();
         mainTable.setItems(sitesCatalogImpl.getCatalogList());
     }
 

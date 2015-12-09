@@ -1,0 +1,16 @@
+.hyperlink:visited {
+    -fx-font-weight: normal;
+    -fx-underline: false;
+    -fx-font-size:18px;
+    -fx-text-fill: #0086BF;
+}
+.hyperlink:focused {
+    -fx-font-weight: bold;
+    -fx-underline: false;
+    -fx-font-size:18px;
+}
+.hyperlink:hover {
+    -fx-underline: true;
+}
+
+
