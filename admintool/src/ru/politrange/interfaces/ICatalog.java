@@ -16,5 +16,5 @@ public interface ICatalog<T> {
     // удалить запись
     void delete(T value);
     ObservableList <T> getCatalogList();
-    void fillTestData();
+    void populateData();
 }
