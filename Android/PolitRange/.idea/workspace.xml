@@ -41,12 +41,9 @@
       <file leaf-file-name="DayCatalog.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/nortti/politrange/intefaces/impls/DayCatalog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42889908">
-              <caret line="27" column="67" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
-              <folding>
-                <element signature="e#789#790#0" expanded="true" />
-                <element signature="e#863#864#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.50688076">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1618,8 +1615,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/nortti/politrange/intefaces/impls/DayCatalog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/nortti/politrange/Daily/Day.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/nortti/politrange/intefaces/impls/DayCatalog.java" />
       </list>
     </option>
   </component>
@@ -2004,12 +2001,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/nortti/politrange/intefaces/impls/DayCatalog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42889908">
-          <caret line="27" column="67" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
-          <folding>
-            <element signature="e#789#790#0" expanded="true" />
-            <element signature="e#863#864#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.50688076">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
