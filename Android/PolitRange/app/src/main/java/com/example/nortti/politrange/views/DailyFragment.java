@@ -2,7 +2,6 @@ package com.example.nortti.politrange.views;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +17,15 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.nortti.politrange.Daily.Day;
+import com.example.nortti.politrange.objects.Day;
 import com.example.nortti.politrange.adapters.DayAdapter;
 import com.example.nortti.politrange.R;
 import com.example.nortti.politrange.intefaces.ICatalog;
+import com.example.nortti.politrange.intefaces.impls.DayCatalog;
 import com.example.nortti.politrange.intefaces.impls.SitesCatalog;
-import com.example.nortti.politrange.objects.Site;
 import com.example.nortti.politrange.adapters.SiteAdapter;
 import com.example.nortti.politrange.SwitchSpinner;
+import com.example.nortti.politrange.objects.Site;
 
 import java.util.ArrayList;
 
@@ -50,10 +50,12 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     private Button dayApply;
     private int Summ;
     private ICatalog sitesCatalogImpl;
+    private ICatalog daysCatalogImpl;
+
 
     public void setDataSource(ICatalog sitesCatalogImpl) {
         this.sitesCatalogImpl = sitesCatalogImpl;
-        fillData();
+        spinData();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,18 +96,21 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
         return v;
     }
 
-    private void fillData() {
+    private void spinData() {
         sitesCatalogImpl.fillData();
         spinner.setAdapter(new SiteAdapter(getActivity(), sitesCatalogImpl.getCatalogList()));
 
     }
 
+    private void listData(Site site){
+        daysCatalogImpl = new DayCatalog(site);
+        daysCatalogImpl.fillData();
+        dayList.setAdapter(new DayAdapter(getActivity(), daysCatalogImpl.getCatalogList()));
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-        switch (position)
-        {
 
-        }
     }
 
     @Override
@@ -115,6 +120,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
 
     @Override
     public void onClick(View v) {
+        int siteIndex = spinner.getSelectedItemPosition();
         switch (v.getId()) {
             case R.id.butSince:
                 SinceDate sinceDate = new SinceDate();
@@ -125,21 +131,9 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
                 ToDate toDate = new ToDate();
                 toDate.show(getFragmentManager(),"datePicker");
                 break;
-            /*case R.id.butApply:
-
-                Summ = 0;
-                days.clear();
-                dayList.setAdapter(dayAdapter);
-
-                for (int a = 0; a < dayName.length; a++)
-                {
-                    Day day = new Day(switchSpinner.getName()[a], switchSpinner.getIndex()[a]);
-                    int b = Integer.parseInt(switchSpinner.getIndex()[a]);
-                    Summ +=b;
-                    days.add(day);
-                }
-                sumInt.setText(String.valueOf(Summ));
-                break;*/
+            case R.id.butApply:
+                listData((Site)sitesCatalogImpl.getCatalogList().get(siteIndex));
+                break;
         }
     }
 

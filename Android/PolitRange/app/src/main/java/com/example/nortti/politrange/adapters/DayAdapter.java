@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.nortti.politrange.Daily.Day;
+import com.example.nortti.politrange.objects.Day;
 import com.example.nortti.politrange.R;
 
 import java.util.ArrayList;
@@ -50,10 +50,10 @@ public class DayAdapter extends BaseAdapter {
         final Day d = getItem(position);
 
         TextView tvDay = (TextView) v.findViewById(R.id.dayDate);
-        tvDay.setText(d.getDayDate());
+        tvDay.setText(d.getDayDateTime());
 
         TextView tvIndex = (TextView) v.findViewById(R.id.dayIndex);
-        tvIndex.setText(d.getDayNum());
+        tvIndex.setText(String.valueOf(d.getDayNum()));
 
 
     }
