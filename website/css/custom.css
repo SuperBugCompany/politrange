@@ -1,0 +1,14 @@
+body { padding-top: 70px; }
+
+.th-avatar{
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
+    border-radius: 500px;
+}
+
+.th-avatar img {
+    border-radius: 500px;
+    max-width: 128px;
+    max-height: 128px;
+}
