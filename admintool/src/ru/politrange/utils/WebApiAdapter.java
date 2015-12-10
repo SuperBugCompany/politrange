@@ -34,54 +34,6 @@ public class WebApiAdapter {
         this.prefix = prefix;
     }
 
-//    public static void main(String[] args) {
-//
-//        String prefix_url = "/api/stats/";
-//        WebApiAdapter webApiAdapter = new WebApiAdapter(prefix_url);
-//        try {
-//             //webApiAdapter.delete("4");
-////            JSONObject json = new JSONObject();
-////            json.put("siteId", 5);
-////            json.put("name", "test3332.org");
-////            webApiAdapter.insert(json);
-//            JSONArray jsonObject = null;
-//            try {
-//                //jsonObject = (JSONArray) new JSONParser().parse(webApiAdapter.select(null));
-//                jsonObject = (JSONArray) new JSONParser().parse(webApiAdapter.select("1"));
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//
-////            try {
-////                jsonObject = (JSONArray) new JSONParser().parse(webApiAdapter.getDataByHTTP(url + prefix_url));
-////            } catch (ParseException e) {
-////                e.printStackTrace();
-////            }
-//
-////            HashMap<Integer, String> hm = new HashMap<>();
-////            hm.putAll();
-//            Iterator<JSONObject> iterator = jsonObject.iterator();
-//
-//
-//            //.parse(getDataByHTTP(url + prefix_url))
-//            // JSONObject jsonObject = new JSONObject();
-////            HashMap<Integer, String> hm = jsonObject;
-////            for (Map.Entry<Integer, String> entry : hm.entrySet()) {
-////                System.out.println(entry.getKey() + " " + entry.getValue());
-////            }
-////            JSONArray msg = (JSONArray) jsonObject.;
-////            Iterator<String> iterator = msg.iterator();
-//            while (iterator.hasNext()) {
-//                JSONObject o = iterator.next();
-//                System.out.println(o.get("personName"));
-//                System.out.println(o.get("rank"));
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
     public String select(String param) throws IOException {
         String result = null;
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
