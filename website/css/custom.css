@@ -12,3 +12,32 @@ body { padding-top: 70px; }
     max-width: 128px;
     max-height: 128px;
 }
+
+.carousel {
+    padding-top: 40px;
+}
+.carousel .glyphicon {
+    color: #286090;
+}
+
+.carousel-control {
+    background-image: none !important;
+}
+
+.row:not(#project) {
+    padding-top: 75px;
+}
+
+.carousel-inner {
+    margin: 0 auto;
+}
+
+#androidCarousel {
+    width: 100%;
+    margin: 0 auto;
+}
+@media (min-width: 768px) {
+    #androidCarousel {
+        width: 60rem;
+    }
+}
