@@ -27,7 +27,7 @@ public class PersonsCatalog implements ICatalog<Person> {
     @Override
     public void add(Person person) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("siteId", person.getId());
+        jsonObject.put("personId", person.getId());
         jsonObject.put("name", person.getName());
         try {
             String result = apiAdapter.insert(jsonObject);
