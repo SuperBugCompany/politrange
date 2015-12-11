@@ -58,8 +58,8 @@ public class WebApiAdapter {
         HttpPost request = null;
         try {
             request = new HttpPost(getFullUrl(null));
-            StringEntity params = new StringEntity(json.toString());
-            request.addHeader("content-type", "application/json");
+            StringEntity params = new StringEntity(json.toString(),"UTF-8");
+            params.setContentType("application/json; charset=UTF-8");
             request.setEntity(params);
             HttpResponse response = httpClient.execute(request);
             if (getStatusRequest(response.getStatusLine().getStatusCode())) {
