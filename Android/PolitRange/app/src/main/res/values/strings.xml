@@ -23,7 +23,7 @@
     <string name="period">Период:</string>
     <string name="since">с</string>
     <string name="till">по</string>
-
+    <string name="info">Информация</string>
     <string-array name="person">
         <item>Путин</item>
         <item>Медведев</item>
