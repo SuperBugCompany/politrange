@@ -8,6 +8,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import ru.politrange.interfaces.ICatalog;
 import ru.politrange.objects.Person;
+import ru.politrange.utils.DialogManager;
 import ru.politrange.utils.WebApiAdapter;
 
 import java.io.IOException;
@@ -26,18 +27,23 @@ public class PersonsCatalog implements ICatalog<Person> {
     @Override
     public void add(Person person) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("siteId", person.getId());
+        jsonObject.put("personId", person.getId());
         jsonObject.put("name", person.getName());
         try {
-            jsonObject = (JSONObject) new JSONParser().parse(apiAdapter.insert(jsonObject));
+            String result = apiAdapter.insert(jsonObject);
+            if (result != null) {
+                jsonObject = (JSONObject) new JSONParser().parse(result);
+                person.setId((int) (long) jsonObject.get("personId"));
+                person.setName((String) jsonObject.get("name"));
+                catalogList.add(person);
+            } else {
+                DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка...");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        person.setId((int) (long) jsonObject.get("personId"));
-        person.setName((String) jsonObject.get("name"));
-        catalogList.add(person);
     }
 
     // для коллекции не используется, но пригодится для случая, когда данные хранятся в БД и пр.
