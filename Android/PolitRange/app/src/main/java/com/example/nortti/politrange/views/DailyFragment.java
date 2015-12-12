@@ -17,14 +17,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.nortti.politrange.objects.Day;
-import com.example.nortti.politrange.adapters.DayAdapter;
 import com.example.nortti.politrange.R;
+import com.example.nortti.politrange.adapters.DayAdapter;
+import com.example.nortti.politrange.adapters.SiteAdapter;
 import com.example.nortti.politrange.intefaces.ICatalog;
 import com.example.nortti.politrange.intefaces.impls.DayCatalog;
 import com.example.nortti.politrange.intefaces.impls.SitesCatalog;
-import com.example.nortti.politrange.adapters.SiteAdapter;
-import com.example.nortti.politrange.SwitchSpinner;
+import com.example.nortti.politrange.objects.Day;
 import com.example.nortti.politrange.objects.Site;
 
 import java.util.ArrayList;
@@ -46,7 +45,6 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     private TextView sumInt;
     private ListView dayList;
     private DayAdapter dayAdapter;
-    SwitchSpinner switchSpinner;
     private Button dayApply;
     private int Summ;
     private ICatalog sitesCatalogImpl;
