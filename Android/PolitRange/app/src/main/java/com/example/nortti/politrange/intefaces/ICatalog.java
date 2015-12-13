@@ -5,5 +5,5 @@ import java.util.ArrayList;
 public interface ICatalog<T> {
 
     ArrayList <T> getCatalogList();
-    void fillData();
+    void populateData();
 }

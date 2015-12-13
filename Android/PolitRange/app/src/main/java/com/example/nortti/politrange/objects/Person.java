@@ -7,11 +7,10 @@ public class Person {
     private int siteId;
     private Site site;
 
-    public Person(int id, String name, int rank, int siteId) {
+    public Person(int id, String name) {
         this.id = id;
         this.name = name;
-        this.rank = rank;
-        this.siteId = siteId;
+
     }
     public Person(){};
 
@@ -31,27 +30,4 @@ public class Person {
         this.name = name;
     }
 
-    public int getRank() {
-        return rank;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    public int getSiteId() {
-        return siteId;
-    }
-
-    public void setSiteId(int siteId) {
-        this.siteId = siteId;
-    }
-
-    public Site getSite() {
-        return site;
-    }
-
-    public void setSite(Site site) {
-        this.site = site;
-    }
 }

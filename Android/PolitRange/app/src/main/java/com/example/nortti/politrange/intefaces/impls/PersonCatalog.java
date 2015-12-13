@@ -3,12 +3,20 @@ package com.example.nortti.politrange.intefaces.impls;
 import com.example.nortti.politrange.intefaces.ICatalog;
 import com.example.nortti.politrange.objects.Person;
 import com.example.nortti.politrange.objects.Site;
+import com.example.nortti.politrange.utils.WebApiAdapter;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PersonCatalog implements ICatalog{
-
+    private final String COMMAND_PREFIX = "/api/persons/";
+    private final WebApiAdapter apiAdapter = new WebApiAdapter("/api/persons/");
     private ArrayList<Person> catalogList = new ArrayList<Person>();
     private  Site site;
 
@@ -19,26 +27,27 @@ public class PersonCatalog implements ICatalog{
 
     @Override
     public ArrayList<Person> getCatalogList() {
-        Iterator<Person> personIterator = catalogList.iterator();
-        while (personIterator.hasNext()){
-            Person person = personIterator.next();
-            if (person.getSiteId() != site.getId()){
-                personIterator.remove();
-            }
-        }
         return catalogList;
     }
 
-    @Override
-    public void fillData() {
-        catalogList.add(new Person(1,"Путин",14670,1));
-        catalogList.add(new Person(2,"Медведев",7392,1));
-        catalogList.add(new Person(3,"Навальный",4170,1));
-        catalogList.add(new Person(4,"Путин",8690,2));
-        catalogList.add(new Person(5,"Медведев",4329,2));
-        catalogList.add(new Person(6,"Навальный",3861,2));
-        catalogList.add(new Person(7,"Путин",5639,3));
-        catalogList.add(new Person(8,"Медведев",5860,3));
-        catalogList.add(new Person(9,"Навальный",2672,3));
+    public void populateData() {
+        JSONArray jsonObject = null;
+
+        try {
+            jsonObject = (JSONArray)(new JSONParser()).parse(this.apiAdapter.select((String)null));
+        } catch (IOException var4) {
+            var4.printStackTrace();
+        } catch (ParseException var5) {
+            var5.printStackTrace();
+        }
+
+        this.catalogList.clear();
+        Iterator iterator = jsonObject.iterator();
+
+        while(iterator.hasNext()) {
+            JSONObject o = (JSONObject)iterator.next();
+            this.catalogList.add(new Person((int)((Long)o.get("personId")).longValue(), (String)o.get("name")));
+        }
+
     }
 }
