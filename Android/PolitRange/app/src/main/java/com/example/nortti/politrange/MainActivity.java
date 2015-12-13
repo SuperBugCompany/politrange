@@ -1,10 +1,16 @@
 package com.example.nortti.politrange;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,9 +57,26 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.info) {
-           Toast.makeText(this,"SuperBug Company Info",Toast.LENGTH_SHORT).show();
+          InfoDialog();
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void InfoDialog(){
+        View dial = getLayoutInflater().inflate(R.layout.dialog,null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomDialog);
+        builder.setView(dial).setCancelable(true).show();
+        TextView link = (TextView) dial.findViewById(R.id.link);
+        link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri adress = Uri.parse("https://superbugcompany.github.io/politrange/website/");
+                Intent openLink = new Intent(Intent.ACTION_VIEW,adress);
+                startActivity(openLink);
+            }
+        });
+
+    }
+
 }

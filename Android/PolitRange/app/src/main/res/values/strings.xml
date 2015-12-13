@@ -69,4 +69,7 @@
     <string name="dateTit">Дата</string>
     <string name="pageTit">Количество новых страниц</string>
     <string name="summTit">Всего за период:</string>
+    <string name="about">О приложении PolitRange</string>
+    <string name="site">Посетите наш сайт</string>
+    <string name="dial_info">Команда программистов <b>SuperBug Company</b> – люди из разных уголков России, которые создали для вас сервис <b>PolitRange</b>, который поможет вам  проанализировать количество имен, упоминаемых на сайтах новостных СМИ.</string>
 </resources>

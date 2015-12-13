@@ -1,3 +1,4 @@
+/*
 package com.example.nortti.politrange.utils;
 
 import org.apache.http.HttpEntity;
@@ -78,4 +79,4 @@ public class WebApiAdapter {
     private boolean getStatusRequest(int statusCode) {
         return statusCode == 200;
     }
-}
+}*/
