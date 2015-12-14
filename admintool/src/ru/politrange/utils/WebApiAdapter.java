@@ -4,6 +4,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -73,6 +74,24 @@ public class WebApiAdapter {
         }
         return result;
     }
+    public boolean update(JSONObject json, String param) throws IOException {
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPut request = null;
+        try {
+            request = new HttpPut(getFullUrl(param));
+            StringEntity params = new StringEntity(json.toString(),"UTF-8");
+            params.setContentType("application/json; charset=UTF-8");
+            request.setEntity(params);
+            HttpResponse response = httpClient.execute(request);
+            return  (getStatusRequest(response.getStatusLine().getStatusCode()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } finally {
+            httpClient.close();
+        }
+        return false;
+    }
+
     public boolean delete(String param) throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         try {
