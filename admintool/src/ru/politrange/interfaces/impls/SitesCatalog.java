@@ -46,9 +46,22 @@ public class SitesCatalog implements ICatalog<Site> {
     }
 
     // для коллекции не используется, но пригодится для случая, когда данные хранятся в БД и пр.
-    public void update(Site site) {
-        // т.к. коллекция и является хранилищем - то ничего обновлять не нужно
-        // если бы данные хранились в БД или файле - в этом методе нужно было бы обновить соотв. запись
+    public boolean update(Site oldValue,Site newValue) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("siteId", newValue.getId());
+        jsonObject.put("name", newValue.getName());
+        try {
+            if (apiAdapter.update(jsonObject, String.valueOf(newValue.getId()))) {
+                oldValue.setId(newValue.getId());
+                oldValue.setName(newValue.getName());
+                return true;
+            } else {
+                DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка обновления...");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
