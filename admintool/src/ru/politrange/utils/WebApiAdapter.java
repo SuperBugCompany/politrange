@@ -13,26 +13,27 @@ import org.apache.http.client.methods.HttpPost;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Iterator;
 
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
  * Created by developermsv on 08.12.2015.
- *  в конструкторе, prefix например "/api/stats/" или /api/persons
+ *  в конструкторе, selectPrefix например "/api/stats/" или /api/persons
  *  метод select, param например "1?begin=11.11.11&end=12.11.11" или просто "1"
  *  метод delete, param например "1" или "2"
  */
 public class WebApiAdapter {
     public static final int HTTP_200_OK = 200;
     private final String url = "http://localhost:10101";
-    private String prefix;
+    private String selectPrefix;
+    private String updatePrefix;
 
-    public WebApiAdapter(String prefix) {
-        this.prefix = prefix;
+    public WebApiAdapter(String selectPrefix) {
+        this.selectPrefix = selectPrefix;
+    }
+    public WebApiAdapter(String selectPrefix,String updatePrefix) {
+        this.selectPrefix = selectPrefix;
+        this.updatePrefix = updatePrefix;
     }
 
     public String select(String param) throws IOException {
@@ -78,7 +79,7 @@ public class WebApiAdapter {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         HttpPut request = null;
         try {
-            request = new HttpPut(getFullUrl(param));
+            request = new HttpPut(getFullUpdateUrl(param));
             StringEntity params = new StringEntity(json.toString(),"UTF-8");
             params.setContentType("application/json; charset=UTF-8");
             request.setEntity(params);
@@ -125,7 +126,10 @@ public class WebApiAdapter {
     }
 
     private URI getFullUrl(String params) throws URISyntaxException {
-        return new URI(url + prefix + (params == null ? "" : params));
+        return new URI(url + selectPrefix + (params == null ? "" : params));
+    }
+    private URI getFullUpdateUrl(String params) throws URISyntaxException {
+        return new URI(url + (updatePrefix == null ? selectPrefix : updatePrefix) + (params == null ? "" : params));
     }
 
     private boolean getStatusRequest(int statusCode) {
