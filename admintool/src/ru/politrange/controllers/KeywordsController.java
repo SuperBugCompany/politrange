@@ -144,8 +144,11 @@ public class KeywordsController {
     //#good_code_8 не повторять код
     // редактировать запись
     private void editKeyword() {
-        editKeywordController.setKeyword((Keyword) mainTable.getSelectionModel().getSelectedItem());
+        Keyword oldValue = (Keyword) mainTable.getSelectionModel().getSelectedItem();
+        Keyword newValue = new Keyword(oldValue.getId(), oldValue.getName(),oldValue.getPerson());
+        editKeywordController.setKeyword(newValue);
         showDialog(MainController.TEXT_TITLE_EDIT);
+        keywordsCatalogImpl.update(oldValue, newValue);
     }
 
     // отображение диалога редактирования
@@ -162,7 +165,7 @@ public class KeywordsController {
         editKeywordStage.showAndWait(); // для ожидания закрытия окна
     }
     // заполнение таблицы ключевых слов
-    private void fillData(Person person) {
+    private void populateData(Person person) {
         keywordsCatalogImpl = new KeywordsCatalog(person);
         keywordsCatalogImpl.populateData();
         mainTable.setItems(keywordsCatalogImpl.getCatalogList());
@@ -172,7 +175,7 @@ public class KeywordsController {
         ComboBox source = (ComboBox)actionEvent.getSource();
         int itemIndex = source.getSelectionModel().getSelectedIndex();
         if (itemIndex != -1) {
-            fillData((Person) personsCatalogImpl.getCatalogList().get(itemIndex));
+            populateData((Person) personsCatalogImpl.getCatalogList().get(itemIndex));
         }
     }
 }
