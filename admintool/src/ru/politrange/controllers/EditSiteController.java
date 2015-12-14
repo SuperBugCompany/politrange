@@ -19,6 +19,7 @@ public class EditSiteController {
     public Button btnCancel;
     public TextField txtName;
     private Site Site;
+    private ModalResult modalResult = ModalResult.MD_CANCEL;
 
     public void setSite(Site Site) {
         if (Site != null){
@@ -35,12 +36,14 @@ public class EditSiteController {
         Node source = (Node) actionEvent.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.hide();
+        setModalResult(ModalResult.MD_SAVE);
     }
 
     public void actionSave(ActionEvent actionEvent) {
         if (checkValues()){
             Site.setName(txtName.getText());
             actionClose(actionEvent);
+            setModalResult(ModalResult.MD_SAVE);
         }
     }
     private boolean checkValues() {
@@ -51,5 +54,11 @@ public class EditSiteController {
         }
         return true;
     }
+    public ModalResult getModalResult() {
+        return modalResult;
+    }
 
+    public void setModalResult(ModalResult modalResult) {
+        this.modalResult = modalResult;
+    }
 }

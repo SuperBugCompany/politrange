@@ -18,6 +18,7 @@ public class EditKeywordController {
     public Button btnCancel;
     public TextField txtName;
     private Keyword keyword;
+    private ModalResult modalResult = ModalResult.MD_CANCEL;
 
     public void setKeyword(Keyword keyword) {
         if (keyword != null) {
@@ -34,12 +35,14 @@ public class EditKeywordController {
         Node source = (Node) actionEvent.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.hide();
+        setModalResult(ModalResult.MD_CANCEL);
     }
 
     public void actionSave(ActionEvent actionEvent) {
         if (checkValues()) {
             keyword.setName(txtName.getText());
             actionClose(actionEvent);
+            setModalResult(ModalResult.MD_SAVE);
         }
     }
 
@@ -50,5 +53,12 @@ public class EditKeywordController {
             return false;
         }
         return true;
+    }
+    public ModalResult getModalResult() {
+        return modalResult;
+    }
+
+    public void setModalResult(ModalResult modalResult) {
+        this.modalResult = modalResult;
     }
 }
