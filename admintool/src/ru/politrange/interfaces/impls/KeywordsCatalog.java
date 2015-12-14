@@ -21,7 +21,7 @@ import java.util.Iterator;
 public class KeywordsCatalog implements ICatalog <Keyword> {
     private final String ADDITIONAL_KEYWORD_PREFIX = "/keywords/";
     private String COMMAND_PREFIX = "/api/persons/";
-    private String COMMAND_UPDATE = "/api/keyword/";
+    private String COMMAND_UPDATE = "/api/keywords/";
     private WebApiAdapter apiAdapter;
     private Person person;
 
@@ -56,7 +56,7 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
 
     public boolean update(Keyword oldValue, Keyword newValue) {
         JSONObject jsonObject = new JSONObject();
-        //jsonObject.put("keywordId", newValue.getId());
+        jsonObject.put("keywordId", newValue.getId());
         jsonObject.put("name", newValue.getName());
         try {
             if (apiAdapter.update(jsonObject, String.valueOf(newValue.getId()))) {
