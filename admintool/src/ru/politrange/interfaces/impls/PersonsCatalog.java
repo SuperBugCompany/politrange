@@ -54,10 +54,12 @@ public class PersonsCatalog implements ICatalog<Person> {
         try {
             if (!apiAdapter.update(jsonObject, String.valueOf(person.getId()))) {
                 DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка обновления...");
+                return false;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     @Override
