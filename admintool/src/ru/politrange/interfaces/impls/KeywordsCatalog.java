@@ -21,6 +21,7 @@ import java.util.Iterator;
 public class KeywordsCatalog implements ICatalog <Keyword> {
     private final String ADDITIONAL_KEYWORD_PREFIX = "/keywords/";
     private String COMMAND_PREFIX = "/api/persons/";
+    private String COMMAND_UPDATE = "/api/keyword/";
     private WebApiAdapter apiAdapter;
     private Person person;
 
@@ -28,7 +29,7 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
     public KeywordsCatalog(Person person) {
         this.person = person;
         COMMAND_PREFIX += String.valueOf(person.getId()) + ADDITIONAL_KEYWORD_PREFIX;
-        apiAdapter = new WebApiAdapter(COMMAND_PREFIX);
+        apiAdapter = new WebApiAdapter(COMMAND_PREFIX,COMMAND_UPDATE);
     }
 
 
@@ -55,7 +56,7 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
 
     public boolean update(Keyword oldValue, Keyword newValue) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("keywordId", newValue.getId());
+        //jsonObject.put("keywordId", newValue.getId());
         jsonObject.put("name", newValue.getName());
         try {
             if (apiAdapter.update(jsonObject, String.valueOf(newValue.getId()))) {
@@ -76,8 +77,11 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
         try {
             if (apiAdapter.delete(String.valueOf(keyword.getId()))) {
                 catalogList.remove(keyword);
+            } else {
+                DialogManager.showErrorDialog("Ошибка", "Неизвестная ошибка удаления...");
             }
-        } catch (IOException e) {
+
+    } catch (IOException e) {
             e.printStackTrace();
         }
     }
