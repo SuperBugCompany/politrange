@@ -102,8 +102,9 @@ public class PersonsController {
         switch (clickedButton.getId()) {
             case "btnAdd":
                 editPersonController.setPerson(new Person());
-                showDialog(MainController.TEXT_TITLE_ADD);
-                personsCatalogImpl.add(editPersonController.getPerson());
+                if (showDialog(MainController.TEXT_TITLE_ADD) == ModalResult.MD_SAVE) {
+                    personsCatalogImpl.add(editPersonController.getPerson());
+                }
                 break;
 
             case "btnEdit":
@@ -114,7 +115,7 @@ public class PersonsController {
 
             case "btnDelete":
                 if (personIsSelected(selectedPerson)) {
-                    if (DialogManager.showConfirmDialog(MainController.TEXT_WARNING,MainController.TEXT_CONFIRM +
+                    if (DialogManager.showConfirmDialog(MainController.TEXT_WARNING, MainController.TEXT_CONFIRM +
                             selectedPerson.getName() + "\"?")) {
                         personsCatalogImpl.delete(selectedPerson);
                     }
@@ -136,13 +137,14 @@ public class PersonsController {
         Person oldPerson = (Person) mainTable.getSelectionModel().getSelectedItem();
         Person newPerson = new Person(oldPerson.getId(), oldPerson.getName());
         editPersonController.setPerson(newPerson);
-        showDialog(MainController.TEXT_TITLE_EDIT);
-        personsCatalogImpl.update(oldPerson,newPerson);
+        if (showDialog(MainController.TEXT_TITLE_EDIT) == ModalResult.MD_SAVE) {
+            personsCatalogImpl.update(oldPerson,newPerson);
+        }
 
     }
 
     // отображение диалога редактирования
-    private void showDialog(String title) {
+    private ModalResult showDialog(String title) {
 
         if (editPersonStage == null) {
             editPersonStage = new Stage();
@@ -153,5 +155,6 @@ public class PersonsController {
             editPersonStage.initOwner(mainStage);
         }
         editPersonStage.showAndWait(); // для ожидания закрытия окна
+        return editPersonController.getModalResult();
     }
 }

@@ -19,6 +19,7 @@ public class EditPersonController {
     public Button btnCancel;
     public TextField txtName;
     private Person person;
+    private ModalResult modalResult = ModalResult.MD_CANCEL;
 
     public void setPerson(Person person) {
         if (person != null){
@@ -35,12 +36,14 @@ public class EditPersonController {
         Node source = (Node) actionEvent.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.hide();
+        setModalResult(ModalResult.MD_CANCEL);
     }
 
     public void actionSave(ActionEvent actionEvent) {
         if (checkValues()){
             person.setName(txtName.getText());
             actionClose(actionEvent);
+            setModalResult(ModalResult.MD_SAVE);
         }
     }
     private boolean checkValues() {
@@ -52,4 +55,11 @@ public class EditPersonController {
         return true;
     }
 
+    public ModalResult getModalResult() {
+        return modalResult;
+    }
+
+    public void setModalResult(ModalResult modalResult) {
+        this.modalResult = modalResult;
+    }
 }
