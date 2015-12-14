@@ -96,7 +96,7 @@ public class WebApiAdapter {
     public boolean delete(String param) throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         try {
-            HttpDelete request = new HttpDelete(getFullUrl(param));
+            HttpDelete request = new HttpDelete(getFullUpdateUrl(param));
             HttpResponse response = httpClient.execute(request);
             return getStatusRequest(response.getStatusLine().getStatusCode());
         } catch (Exception ex) {
