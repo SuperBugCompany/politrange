@@ -53,7 +53,7 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
     }
 
     // для коллекции не используется, но пригодится для случая, когда данные хранятся в БД и пр.
-    public void update(Keyword person) {
+    public boolean update(Keyword person) {
         // т.к. коллекция и является хранилищем - то ничего обновлять не нужно
         // если бы данные хранились в БД или файле - в этом методе нужно было бы обновить соотв. запись
     }

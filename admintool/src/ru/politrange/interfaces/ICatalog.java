@@ -12,7 +12,7 @@ public interface ICatalog<T> {
     // добавить запись
     void add(T value);
     // внести измененные значения (подтвердить измененные данные)
-    void update(T value);
+    boolean update(T value);
     // удалить запись
     void delete(T value);
     ObservableList <T> getCatalogList();
