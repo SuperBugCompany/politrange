@@ -47,19 +47,22 @@ public class PersonsCatalog implements ICatalog<Person> {
     }
 
     // для коллекции не используется, но пригодится для случая, когда данные хранятся в БД и пр.
-    public boolean update(Person person) {
+    public boolean update(Person oldValue, Person newValue) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("personId", person.getId());
-        jsonObject.put("name", person.getName());
+        jsonObject.put("personId", newValue.getId());
+        jsonObject.put("name", newValue.getName());
         try {
-            if (!apiAdapter.update(jsonObject, String.valueOf(person.getId()))) {
+            if (apiAdapter.update(jsonObject, String.valueOf(newValue.getId()))) {
+                oldValue.setId(newValue.getId());
+                oldValue.setName(newValue.getName());
+                return true;
+            } else {
                 DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка обновления...");
-                return false;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     @Override

@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.politrange.interfaces.ICatalog;
-import ru.politrange.interfaces.impls.PersonsCatalog;
 import ru.politrange.objects.Person;
 import ru.politrange.utils.DialogManager;
 
@@ -53,7 +52,7 @@ public class PersonsController {
     // нициализировать возможно только через setter
     public void setDataSource (ICatalog personsCatalogImpl) {
         this.personsCatalogImpl = personsCatalogImpl;
-        fillData();
+        populateData();
     }
 
 
@@ -71,7 +70,7 @@ public class PersonsController {
     }
 
     // заполнение таблицы интерфейса
-    private void fillData() {
+    private void populateData() {
         personsCatalogImpl.populateData();
         mainTable.setItems(personsCatalogImpl.getCatalogList());
     }
@@ -134,8 +133,12 @@ public class PersonsController {
     //#good_code_8 не повторять код
     // редактировать личность
     private void editPerson() {
-        editPersonController.setPerson((Person) mainTable.getSelectionModel().getSelectedItem());
+        Person oldPerson = (Person) mainTable.getSelectionModel().getSelectedItem();
+        Person newPerson = new Person(oldPerson.getId(), oldPerson.getName());
+        editPersonController.setPerson(newPerson);
         showDialog(MainController.TEXT_TITLE_EDIT);
+        personsCatalogImpl.update(oldPerson,newPerson);
+
     }
 
     // отображение диалога редактирования

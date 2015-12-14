@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.politrange.interfaces.ICatalog;
-import ru.politrange.interfaces.impls.SitesCatalog;
 import ru.politrange.objects.Site;
 import ru.politrange.utils.DialogManager;
 
@@ -51,7 +50,7 @@ public class SitesController {
     // нициализировать возможно только через setter
     public void setDataSource (ICatalog sitesCatalogImpl) {
         this.sitesCatalogImpl = sitesCatalogImpl;
-        fillData();
+        populateData();
     }
 
     // #good_code_4 методы не пергружены логикой
@@ -68,7 +67,7 @@ public class SitesController {
     }
 
     // заполнение таблицы интерфейса
-    private void fillData() {
+    private void populateData() {
         sitesCatalogImpl.populateData();
         mainTable.setItems(sitesCatalogImpl.getCatalogList());
     }
@@ -131,8 +130,11 @@ public class SitesController {
     //#good_code_8 не повторять код
     // редактировать запись
     private void editSite() {
-        editSiteController.setSite((Site) mainTable.getSelectionModel().getSelectedItem());
+        Site oldValue = (Site) mainTable.getSelectionModel().getSelectedItem();
+        Site newValue = new Site(oldValue.getId(), oldValue.getName());
+        editSiteController.setSite(newValue);
         showDialog(MainController.TEXT_TITLE_EDIT);
+        sitesCatalogImpl.update(oldValue, newValue);
     }
 
     // отображение диалога редактирования
