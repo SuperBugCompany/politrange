@@ -1,5 +1,6 @@
 package ru.politrange.controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -48,7 +49,7 @@ public class SitesController {
     // #solid_o
     // personsCatalogImpl это DataSource
     // нициализировать возможно только через setter
-    public void setDataSource (ICatalog sitesCatalogImpl) {
+    public void setDataSource(ICatalog sitesCatalogImpl) {
         this.sitesCatalogImpl = sitesCatalogImpl;
         populateData();
     }
@@ -99,8 +100,9 @@ public class SitesController {
         switch (clickedButton.getId()) {
             case "btnAdd":
                 editSiteController.setSite(new Site());
-                showDialog(MainController.TEXT_TITLE_ADD);
-                sitesCatalogImpl.add(editSiteController.getSite());
+                if (showDialog(MainController.TEXT_TITLE_ADD) == ModalResult.MD_SAVE) {
+                    sitesCatalogImpl.add(editSiteController.getSite());
+                }
                 break;
 
             case "btnEdit":
@@ -119,8 +121,9 @@ public class SitesController {
                 break;
         }
     }
+
     private boolean siteIsSelected(Site selectedSite) {
-        if(selectedSite == null){
+        if (selectedSite == null) {
             DialogManager.showInfoDialog(MainController.TEXT_ERROR, MainController.TEXT_SELECT_RECORD);
             return false;
         }
@@ -133,12 +136,13 @@ public class SitesController {
         Site oldValue = (Site) mainTable.getSelectionModel().getSelectedItem();
         Site newValue = new Site(oldValue.getId(), oldValue.getName());
         editSiteController.setSite(newValue);
-        showDialog(MainController.TEXT_TITLE_EDIT);
-        sitesCatalogImpl.update(oldValue, newValue);
+        if (showDialog(MainController.TEXT_TITLE_EDIT) == ModalResult.MD_SAVE) {
+            sitesCatalogImpl.update(oldValue, newValue);
+        }
     }
 
     // отображение диалога редактирования
-    private void showDialog(String title) {
+    private ModalResult showDialog(String title) {
 
         if (editSiteStage == null) {
             editSiteStage = new Stage();
@@ -149,5 +153,6 @@ public class SitesController {
             editSiteStage.initOwner(mainStage);
         }
         editSiteStage.showAndWait(); // для ожидания закрытия окна
+        return editSiteController.getModalResult();
     }
 }
