@@ -56,13 +56,13 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
 
 
     private void spinData() {
-        siteCatalogImpl.fillData();
+        siteCatalogImpl.populateData();
         spinner.setAdapter(new SiteAdapter(getActivity(), siteCatalogImpl.getCatalogList()));
     }
 
     private void listData(Site site) {
         personCatalogImpl = new PersonCatalog(site);
-        personCatalogImpl.fillData();
+        personCatalogImpl.populateData();
         genList.setAdapter(new GenAdapter(getActivity(), personCatalogImpl.getCatalogList()));
     }
 

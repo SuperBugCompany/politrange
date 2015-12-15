@@ -95,14 +95,14 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     }
 
     private void spinData() {
-        sitesCatalogImpl.fillData();
+        sitesCatalogImpl.populateData();
         spinner.setAdapter(new SiteAdapter(getActivity(), sitesCatalogImpl.getCatalogList()));
 
     }
 
     private void listData(Site site){
         daysCatalogImpl = new DayCatalog(site);
-        daysCatalogImpl.fillData();
+        daysCatalogImpl.populateData();
         dayList.setAdapter(new DayAdapter(getActivity(), daysCatalogImpl.getCatalogList()));
     }
 

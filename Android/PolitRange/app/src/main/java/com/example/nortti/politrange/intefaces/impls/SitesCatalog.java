@@ -14,7 +14,7 @@ public class SitesCatalog implements ICatalog{
     public ArrayList<Site> getCatalogList() {
         return catalogList;
     }
-    public void fillData(){
+    public void populateData(){
         catalogList.add(new Site(1,"Lenta.ru",R.drawable.ic_lenta));
         catalogList.add(new Site(2,"Rbc.ru",R.drawable.ic_rbc));
         catalogList.add(new Site(3,"Tass.ru",R.drawable.ic_tass));

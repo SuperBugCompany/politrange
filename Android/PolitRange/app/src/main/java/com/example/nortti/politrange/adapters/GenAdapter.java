@@ -53,7 +53,7 @@ public class GenAdapter extends BaseAdapter {
         tvName.setText(p.getName());
 
         TextView tvIndex = (TextView) v.findViewById(R.id.genIndex);
-        tvIndex.setText(String.valueOf(p.getRank()));
+
 
 
     }
