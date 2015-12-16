@@ -1,0 +1,8 @@
+Системение требования: 
+1. Windows не ниже windows Vista;
+2. Наличие вэб-сервиса, с адресом http://localhost:10101 
+
+Перед началом работы с программой, надо:
+1. Установить MySQL Community Server, доступен по ссылке
+http://dev.mysql.com/downloads/windows/installer/5.7.html
+2. Установить вэб-сервис PolitRange

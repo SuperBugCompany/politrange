@@ -9,7 +9,7 @@
           <list>
             <JavaFxManifestAttribute>
               <option name="name" value="MIDlet-Icon" />
-              <option name="value" value="resource/icon32.png" />
+              <option name="value" value="resource/admintool.ico" />
             </JavaFxManifestAttribute>
           </list>
         </option>

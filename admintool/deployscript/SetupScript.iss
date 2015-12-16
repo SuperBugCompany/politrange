@@ -22,9 +22,11 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName=PolitRange
 AllowNoIcons=yes
+InfoBeforeFile=D:\politrange\admintool\deployscript\requirements.txt
 OutputBaseFilename=SetupPolitRangeAdminTool
+SetupIconFile=D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\admintool.ico
 ;lzma
-Compression= none
+Compression= lzma
 SolidCompression=yes
 
 [Languages]
@@ -32,14 +34,15 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: checked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\admintool.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\admintool.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\msvcp100.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\msvcp120.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\msvcr100.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\msvcr120.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\packager.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\app\*"; DestDir: "{app}\app\"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\runtime\*"; DestDir: "{app}\runtime\"; Flags: ignoreversion recursesubdirs createallsubdirs
