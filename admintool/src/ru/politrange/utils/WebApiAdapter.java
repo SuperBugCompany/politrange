@@ -1,6 +1,5 @@
 package ru.politrange.utils;
 
-import com.sun.deploy.net.URLEncoder;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -15,7 +14,6 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.apache.http.impl.io.IdentityInputStream;
 import org.json.simple.JSONObject;
 
 /**
@@ -49,7 +47,6 @@ public class WebApiAdapter {
             HttpResponse response = httpClient.execute(request);
             if (getStatusRequest(response.getStatusLine().getStatusCode())) {
                 result = getResultContent(response);
-                DialogManager.showErrorDialog("test", result);
             }
         } catch (URISyntaxException e) {
             e.printStackTrace();
