@@ -22,9 +22,11 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName=PolitRange
 AllowNoIcons=yes
+InfoAfterFile=D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\requirements.txt
 OutputBaseFilename=SetupPolitRangeAdminTool
+SetupIconFile=D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\admintool.ico
 ;lzma
-Compression= none
+Compression= lzma
 SolidCompression=yes
 
 [Languages]
@@ -32,7 +34,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: checked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: true
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
