@@ -79,7 +79,7 @@ public class PersonsController {
     private void initLoader() {
         try {
 
-            fxmlLoader.setLocation(getClass().getResource("../fxml/edit_person.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/ru/politrange/fxml/edit_person.fxml"));
             fxmlEdit = fxmlLoader.load();
             editPersonController = fxmlLoader.getController();
 

@@ -56,7 +56,7 @@ public class MainController {
 // при нажатии на линк Личности, загружаем интерфейс справочника "Личности"
     public void onLinkPersons(ActionEvent actionEvent) {
         try {
-            PersonsController personsController = (PersonsController) replaceSceneContent("../fxml/persons.fxml");
+            PersonsController personsController = (PersonsController) replaceSceneContent("/ru/politrange/fxml/persons.fxml");
             personsController.setMainStage(mainStage);
             personsController.setDataSource(new PersonsCatalog());
         } catch (Exception e) {
@@ -66,7 +66,7 @@ public class MainController {
 // при нажатиии на линк Ключи, загружаем интерфейс справочника "Ключи"
     public void onLinkKeywords(ActionEvent actionEvent) {
         try {
-            KeywordsController keywordsController = (KeywordsController) replaceSceneContent("../fxml/keywords.fxml");
+            KeywordsController keywordsController = (KeywordsController) replaceSceneContent("/ru/politrange/fxml/keywords.fxml");
             keywordsController.setMainStage(mainStage);
             keywordsController.setDataSource(new PersonsCatalog());
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class MainController {
 // при нажатии на линк Сайты, загружаем интерфейс справочника "Сайты"
     public void onLinkSites(ActionEvent actionEvent) {
         try {
-            SitesController sitesController = (SitesController) replaceSceneContent("../fxml/sites.fxml");
+            SitesController sitesController = (SitesController) replaceSceneContent("/ru/politrange/fxml/sites.fxml");
             sitesController.setMainStage(mainStage);
             sitesController.setDataSource(new SitesCatalog());
         } catch (Exception e) {

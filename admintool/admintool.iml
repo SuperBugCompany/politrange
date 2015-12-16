@@ -8,7 +8,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="controlsfx-8.40.10" level="project" />
     <orderEntry type="library" name="commons-logging-1.2" level="project" />
+    <orderEntry type="library" name="controlsfx-8.40.10" level="project" />
+    <orderEntry type="library" name="httpclient-4.5.1" level="project" />
+    <orderEntry type="library" name="httpcore-4.4.3" level="project" />
+    <orderEntry type="library" name="json-simple-1.1.1" level="project" />
   </component>
 </module>

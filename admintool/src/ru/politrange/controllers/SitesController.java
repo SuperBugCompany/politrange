@@ -77,7 +77,7 @@ public class SitesController {
     private void initLoader() {
         try {
 
-            fxmlLoader.setLocation(getClass().getResource("../fxml/edit_site.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/ru/politrange/fxml/edit_site.fxml"));
             fxmlEdit = fxmlLoader.load();
             editSiteController = fxmlLoader.getController();
 

@@ -92,7 +92,7 @@ public class KeywordsController {
     private void initLoader() {
         try {
 
-            fxmlLoader.setLocation(getClass().getResource("../fxml/edit_keyword.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/ru/politrange/fxml/edit_keyword.fxml"));
             fxmlEdit = fxmlLoader.load();
             editKeywordController = fxmlLoader.getController();
 
