@@ -1,5 +1,6 @@
 package ru.politrange.utils;
 
+import com.sun.deploy.net.URLEncoder;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -14,16 +15,18 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.apache.http.impl.io.IdentityInputStream;
 import org.json.simple.JSONObject;
 
 /**
  * Created by developermsv on 08.12.2015.
- *  в конструкторе, selectPrefix например "/api/stats/" или /api/persons
- *  метод select, param например "1?begin=11.11.11&end=12.11.11" или просто "1"
- *  метод delete, param например "1" или "2"
+ * в конструкторе, selectPrefix например "/api/stats/" или /api/persons
+ * метод select, param например "1?begin=11.11.11&end=12.11.11" или просто "1"
+ * метод delete, param например "1" или "2"
  */
 public class WebApiAdapter {
     public static final int HTTP_200_OK = 200;
+    public static final String DEFAULT_CHARSET = "UTF-8";
     private final String url = "http://localhost:10101";
     private String selectPrefix;
     private String updatePrefix;
@@ -31,7 +34,8 @@ public class WebApiAdapter {
     public WebApiAdapter(String selectPrefix) {
         this.selectPrefix = selectPrefix;
     }
-    public WebApiAdapter(String selectPrefix,String updatePrefix) {
+
+    public WebApiAdapter(String selectPrefix, String updatePrefix) {
         this.selectPrefix = selectPrefix;
         this.updatePrefix = updatePrefix;
     }
@@ -45,6 +49,7 @@ public class WebApiAdapter {
             HttpResponse response = httpClient.execute(request);
             if (getStatusRequest(response.getStatusLine().getStatusCode())) {
                 result = getResultContent(response);
+                DialogManager.showErrorDialog("test", result);
             }
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -60,7 +65,7 @@ public class WebApiAdapter {
         HttpPost request = null;
         try {
             request = new HttpPost(getFullUrl(null));
-            StringEntity params = new StringEntity(json.toString(),"UTF-8");
+            StringEntity params = new StringEntity(json.toString(), DEFAULT_CHARSET);
             params.setContentType("application/json; charset=UTF-8");
             request.setEntity(params);
             HttpResponse response = httpClient.execute(request);
@@ -75,16 +80,17 @@ public class WebApiAdapter {
         }
         return result;
     }
+
     public boolean update(JSONObject json, String param) throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         HttpPut request = null;
         try {
             request = new HttpPut(getFullUpdateUrl(param));
-            StringEntity params = new StringEntity(json.toString(),"UTF-8");
-            params.setContentType("application/json; charset=UTF-8");
+            StringEntity params = new StringEntity(json.toString(), DEFAULT_CHARSET);
+            params.setContentType("application/json; charset=" + DEFAULT_CHARSET);
             request.setEntity(params);
             HttpResponse response = httpClient.execute(request);
-            return  (getStatusRequest(response.getStatusLine().getStatusCode()));
+            return (getStatusRequest(response.getStatusLine().getStatusCode()));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } finally {
@@ -110,7 +116,7 @@ public class WebApiAdapter {
         String result = null;
         HttpEntity entity = response.getEntity();
         if (entity != null) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent(), DEFAULT_CHARSET));
             try {
                 StringBuilder str = new StringBuilder();
                 String line;
@@ -128,6 +134,7 @@ public class WebApiAdapter {
     private URI getFullUrl(String params) throws URISyntaxException {
         return new URI(url + selectPrefix + (params == null ? "" : params));
     }
+
     private URI getFullUpdateUrl(String params) throws URISyntaxException {
         return new URI(url + (updatePrefix == null ? selectPrefix : updatePrefix) + (params == null ? "" : params));
     }
