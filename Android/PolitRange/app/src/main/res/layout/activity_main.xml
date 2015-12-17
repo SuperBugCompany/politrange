@@ -38,7 +38,7 @@
                     <fragment
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:name="com.example.nortti.politrange.Fragments.GeneralFragment"
+                        android:name="com.example.nortti.politrange.views.GeneralFragment"
                         android:id="@+id/fragment"
                         tools:layout="@layout/general_fragment" />
                 </LinearLayout>
@@ -52,7 +52,7 @@
                     <fragment
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:name="com.example.nortti.politrange.Fragments.DailyFragment"
+                        android:name="com.example.nortti.politrange.views.DailyFragment"
                         android:id="@+id/fragment2"
                         tools:layout="@layout/daily_fragment" />
                 </LinearLayout>

@@ -1,4 +1,5 @@
 package ru.politrange.controllers;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,7 +37,7 @@ public class KeywordsController {
     private Stage editKeywordStage;
 
     @FXML
-    public TableColumn <Keyword, String> columnName;
+    public TableColumn<Keyword, String> columnName;
     public ComboBox comBoxPersons;
     public TableView mainTable;
 
@@ -71,6 +72,7 @@ public class KeywordsController {
             }
         });
     }
+
     // возращает каталог список имен личностей
     public ObservableList<String> getPersonNameList(ObservableList<Person> catalogList) {
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -90,7 +92,7 @@ public class KeywordsController {
     private void initLoader() {
         try {
 
-            fxmlLoader.setLocation(getClass().getResource("../fxml/edit_keyword.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/ru/politrange/fxml/edit_keyword.fxml"));
             fxmlEdit = fxmlLoader.load();
             editKeywordController = fxmlLoader.getController();
 
@@ -113,8 +115,9 @@ public class KeywordsController {
         switch (clickedButton.getId()) {
             case "btnAdd":
                 editKeywordController.setKeyword(new Keyword());
-                showDialog(MainController.TEXT_TITLE_ADD);
-                keywordsCatalogImpl.add(editKeywordController.getKeyword());
+                if (showDialog(MainController.TEXT_TITLE_ADD) == ModalResult.MD_SAVE) {
+                    keywordsCatalogImpl.add(editKeywordController.getKeyword());
+                }
                 break;
 
             case "btnEdit":
@@ -133,8 +136,9 @@ public class KeywordsController {
                 break;
         }
     }
+
     private boolean keywordIsSelected(Keyword selectedKeyword) {
-        if(selectedKeyword == null){
+        if (selectedKeyword == null) {
             DialogManager.showInfoDialog(MainController.TEXT_ERROR, MainController.TEXT_SELECT_RECORD);
             return false;
         }
@@ -144,12 +148,16 @@ public class KeywordsController {
     //#good_code_8 не повторять код
     // редактировать запись
     private void editKeyword() {
-        editKeywordController.setKeyword((Keyword) mainTable.getSelectionModel().getSelectedItem());
-        showDialog(MainController.TEXT_TITLE_EDIT);
+        Keyword oldValue = (Keyword) mainTable.getSelectionModel().getSelectedItem();
+        Keyword newValue = new Keyword(oldValue.getId(), oldValue.getName(), oldValue.getPerson());
+        editKeywordController.setKeyword(newValue);
+        if (showDialog(MainController.TEXT_TITLE_EDIT) == ModalResult.MD_SAVE) {
+            keywordsCatalogImpl.update(oldValue, newValue);
+        }
     }
 
     // отображение диалога редактирования
-    private void showDialog(String title) {
+    private ModalResult showDialog(String title) {
 
         if (editKeywordStage == null) {
             editKeywordStage = new Stage();
@@ -160,19 +168,21 @@ public class KeywordsController {
             editKeywordStage.initOwner(mainStage);
         }
         editKeywordStage.showAndWait(); // для ожидания закрытия окна
+        return editKeywordController.getModalResult();
     }
+
     // заполнение таблицы ключевых слов
-    private void fillData(Person person) {
+    private void populateData(Person person) {
         keywordsCatalogImpl = new KeywordsCatalog(person);
         keywordsCatalogImpl.populateData();
         mainTable.setItems(keywordsCatalogImpl.getCatalogList());
     }
 
     public void actionSelectItem(ActionEvent actionEvent) {
-        ComboBox source = (ComboBox)actionEvent.getSource();
+        ComboBox source = (ComboBox) actionEvent.getSource();
         int itemIndex = source.getSelectionModel().getSelectedIndex();
         if (itemIndex != -1) {
-            fillData((Person) personsCatalogImpl.getCatalogList().get(itemIndex));
+            populateData((Person) personsCatalogImpl.getCatalogList().get(itemIndex));
         }
     }
 }

@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.politrange.interfaces.ICatalog;
-import ru.politrange.interfaces.impls.PersonsCatalog;
 import ru.politrange.objects.Person;
 import ru.politrange.utils.DialogManager;
 
@@ -53,7 +52,7 @@ public class PersonsController {
     // нициализировать возможно только через setter
     public void setDataSource (ICatalog personsCatalogImpl) {
         this.personsCatalogImpl = personsCatalogImpl;
-        fillData();
+        populateData();
     }
 
 
@@ -71,7 +70,7 @@ public class PersonsController {
     }
 
     // заполнение таблицы интерфейса
-    private void fillData() {
+    private void populateData() {
         personsCatalogImpl.populateData();
         mainTable.setItems(personsCatalogImpl.getCatalogList());
     }
@@ -80,7 +79,7 @@ public class PersonsController {
     private void initLoader() {
         try {
 
-            fxmlLoader.setLocation(getClass().getResource("../fxml/edit_person.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/ru/politrange/fxml/edit_person.fxml"));
             fxmlEdit = fxmlLoader.load();
             editPersonController = fxmlLoader.getController();
 
@@ -103,8 +102,9 @@ public class PersonsController {
         switch (clickedButton.getId()) {
             case "btnAdd":
                 editPersonController.setPerson(new Person());
-                showDialog(MainController.TEXT_TITLE_ADD);
-                personsCatalogImpl.add(editPersonController.getPerson());
+                if (showDialog(MainController.TEXT_TITLE_ADD) == ModalResult.MD_SAVE) {
+                    personsCatalogImpl.add(editPersonController.getPerson());
+                }
                 break;
 
             case "btnEdit":
@@ -115,7 +115,7 @@ public class PersonsController {
 
             case "btnDelete":
                 if (personIsSelected(selectedPerson)) {
-                    if (DialogManager.showConfirmDialog(MainController.TEXT_WARNING,MainController.TEXT_CONFIRM +
+                    if (DialogManager.showConfirmDialog(MainController.TEXT_WARNING, MainController.TEXT_CONFIRM +
                             selectedPerson.getName() + "\"?")) {
                         personsCatalogImpl.delete(selectedPerson);
                     }
@@ -134,12 +134,17 @@ public class PersonsController {
     //#good_code_8 не повторять код
     // редактировать личность
     private void editPerson() {
-        editPersonController.setPerson((Person) mainTable.getSelectionModel().getSelectedItem());
-        showDialog(MainController.TEXT_TITLE_EDIT);
+        Person oldPerson = (Person) mainTable.getSelectionModel().getSelectedItem();
+        Person newPerson = new Person(oldPerson.getId(), oldPerson.getName());
+        editPersonController.setPerson(newPerson);
+        if (showDialog(MainController.TEXT_TITLE_EDIT) == ModalResult.MD_SAVE) {
+            personsCatalogImpl.update(oldPerson,newPerson);
+        }
+
     }
 
     // отображение диалога редактирования
-    private void showDialog(String title) {
+    private ModalResult showDialog(String title) {
 
         if (editPersonStage == null) {
             editPersonStage = new Stage();
@@ -150,5 +155,6 @@ public class PersonsController {
             editPersonStage.initOwner(mainStage);
         }
         editPersonStage.showAndWait(); // для ожидания закрытия окна
+        return editPersonController.getModalResult();
     }
 }

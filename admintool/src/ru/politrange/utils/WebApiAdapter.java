@@ -4,6 +4,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -12,75 +13,30 @@ import org.apache.http.client.methods.HttpPost;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Iterator;
 
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
  * Created by developermsv on 08.12.2015.
- *  в конструкторе, prefix например "/api/stats/" или /api/persons
- *  метод select, param например "1?begin=11.11.11&end=12.11.11" или просто "1"
- *  метод delete, param например "1" или "2"
+ * в конструкторе, selectPrefix например "/api/stats/" или /api/persons
+ * метод select, param например "1?begin=11.11.11&end=12.11.11" или просто "1"
+ * метод delete, param например "1" или "2"
  */
 public class WebApiAdapter {
     public static final int HTTP_200_OK = 200;
+    public static final String DEFAULT_CHARSET = "UTF-8";
     private final String url = "http://localhost:10101";
-    private String prefix;
+    private String selectPrefix;
+    private String updatePrefix;
 
-    public WebApiAdapter(String prefix) {
-        this.prefix = prefix;
+    public WebApiAdapter(String selectPrefix) {
+        this.selectPrefix = selectPrefix;
     }
 
-//    public static void main(String[] args) {
-//
-//        String prefix_url = "/api/stats/";
-//        WebApiAdapter webApiAdapter = new WebApiAdapter(prefix_url);
-//        try {
-//             //webApiAdapter.delete("4");
-////            JSONObject json = new JSONObject();
-////            json.put("siteId", 5);
-////            json.put("name", "test3332.org");
-////            webApiAdapter.insert(json);
-//            JSONArray jsonObject = null;
-//            try {
-//                //jsonObject = (JSONArray) new JSONParser().parse(webApiAdapter.select(null));
-//                jsonObject = (JSONArray) new JSONParser().parse(webApiAdapter.select("1"));
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//
-////            try {
-////                jsonObject = (JSONArray) new JSONParser().parse(webApiAdapter.getDataByHTTP(url + prefix_url));
-////            } catch (ParseException e) {
-////                e.printStackTrace();
-////            }
-//
-////            HashMap<Integer, String> hm = new HashMap<>();
-////            hm.putAll();
-//            Iterator<JSONObject> iterator = jsonObject.iterator();
-//
-//
-//            //.parse(getDataByHTTP(url + prefix_url))
-//            // JSONObject jsonObject = new JSONObject();
-////            HashMap<Integer, String> hm = jsonObject;
-////            for (Map.Entry<Integer, String> entry : hm.entrySet()) {
-////                System.out.println(entry.getKey() + " " + entry.getValue());
-////            }
-////            JSONArray msg = (JSONArray) jsonObject.;
-////            Iterator<String> iterator = msg.iterator();
-//            while (iterator.hasNext()) {
-//                JSONObject o = iterator.next();
-//                System.out.println(o.get("personName"));
-//                System.out.println(o.get("rank"));
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    public WebApiAdapter(String selectPrefix, String updatePrefix) {
+        this.selectPrefix = selectPrefix;
+        this.updatePrefix = updatePrefix;
+    }
 
     public String select(String param) throws IOException {
         String result = null;
@@ -106,8 +62,8 @@ public class WebApiAdapter {
         HttpPost request = null;
         try {
             request = new HttpPost(getFullUrl(null));
-            StringEntity params = new StringEntity(json.toString());
-            request.addHeader("content-type", "application/json");
+            StringEntity params = new StringEntity(json.toString(), DEFAULT_CHARSET);
+            params.setContentType("application/json; charset=UTF-8");
             request.setEntity(params);
             HttpResponse response = httpClient.execute(request);
             if (getStatusRequest(response.getStatusLine().getStatusCode())) {
@@ -121,10 +77,29 @@ public class WebApiAdapter {
         }
         return result;
     }
+
+    public boolean update(JSONObject json, String param) throws IOException {
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPut request = null;
+        try {
+            request = new HttpPut(getFullUpdateUrl(param));
+            StringEntity params = new StringEntity(json.toString(), DEFAULT_CHARSET);
+            params.setContentType("application/json; charset=" + DEFAULT_CHARSET);
+            request.setEntity(params);
+            HttpResponse response = httpClient.execute(request);
+            return (getStatusRequest(response.getStatusLine().getStatusCode()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } finally {
+            httpClient.close();
+        }
+        return false;
+    }
+
     public boolean delete(String param) throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         try {
-            HttpDelete request = new HttpDelete(getFullUrl(param));
+            HttpDelete request = new HttpDelete(getFullUpdateUrl(param));
             HttpResponse response = httpClient.execute(request);
             return getStatusRequest(response.getStatusLine().getStatusCode());
         } catch (Exception ex) {
@@ -138,7 +113,7 @@ public class WebApiAdapter {
         String result = null;
         HttpEntity entity = response.getEntity();
         if (entity != null) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent(), DEFAULT_CHARSET));
             try {
                 StringBuilder str = new StringBuilder();
                 String line;
@@ -154,7 +129,11 @@ public class WebApiAdapter {
     }
 
     private URI getFullUrl(String params) throws URISyntaxException {
-        return new URI(url + prefix + (params == null ? "" : params));
+        return new URI(url + selectPrefix + (params == null ? "" : params));
+    }
+
+    private URI getFullUpdateUrl(String params) throws URISyntaxException {
+        return new URI(url + (updatePrefix == null ? selectPrefix : updatePrefix) + (params == null ? "" : params));
     }
 
     private boolean getStatusRequest(int statusCode) {
