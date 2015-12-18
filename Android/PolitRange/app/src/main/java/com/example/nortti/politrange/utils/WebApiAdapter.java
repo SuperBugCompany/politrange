@@ -30,7 +30,7 @@ public class WebApiAdapter {
 
         try {
             request = new HttpGet(this.getFullUrl(param));
-           CloseableHttpResponse e = httpClient.execute(request);
+           HttpResponse e = httpClient.execute(request);
             if(this.getStatusRequest(e.getStatusLine().getStatusCode())) {
                 result = this.getResultContent(e);
             }

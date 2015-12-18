@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 public class PersonCatalog implements ICatalog{
     private final String COMMAND_PREFIX = "/api/persons/";
-    private final WebApiAdapter apiAdapter = new WebApiAdapter("/api/persons/");
+    private final WebApiAdapter apiAdapter = new WebApiAdapter(COMMAND_PREFIX);
     private ArrayList<Person> catalogList = new ArrayList<Person>();
     private  Site site;
 
@@ -34,19 +34,19 @@ public class PersonCatalog implements ICatalog{
         JSONArray jsonObject = null;
 
         try {
-            jsonObject = (JSONArray)(new JSONParser()).parse(this.apiAdapter.select((String)null));
-        } catch (IOException var4) {
-            var4.printStackTrace();
-        } catch (ParseException var5) {
-            var5.printStackTrace();
+            jsonObject = (JSONArray)(new JSONParser()).parse(apiAdapter.select(null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
-        this.catalogList.clear();
-        Iterator iterator = jsonObject.iterator();
+        catalogList.clear();
+        Iterator<JSONObject> iterator = jsonObject.iterator();
 
         while(iterator.hasNext()) {
-            JSONObject o = (JSONObject)iterator.next();
-            this.catalogList.add(new Person((int)((Long)o.get("personId")).longValue(), (String)o.get("name")));
+            JSONObject o = iterator.next();
+            catalogList.add(new Person((int)(long)o.get("personId"), (String)o.get("name")));
         }
 
     }

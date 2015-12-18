@@ -2,6 +2,7 @@ package com.example.nortti.politrange.views;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,6 +52,8 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
         genList = (ListView) v.findViewById(R.id.genList);
         genList.addHeaderView(header);
         setSpinnerSource(new SitesCatalog());
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         return v;
     }
 
