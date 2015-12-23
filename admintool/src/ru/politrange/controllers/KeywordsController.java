@@ -115,7 +115,7 @@ public class KeywordsController {
         switch (clickedButton.getId()) {
             case "btnAdd":
                 editKeywordController.setKeyword(new Keyword());
-                if (showDialog(MainController.TEXT_TITLE_ADD) == ModalResult.MD_SAVE) {
+                if (showDialog(MainController.TITLE_ADD_TEXT) == ModalResult.MD_SAVE) {
                     keywordsCatalogImpl.add(editKeywordController.getKeyword());
                 }
                 break;
@@ -128,7 +128,7 @@ public class KeywordsController {
 
             case "btnDelete":
                 if (keywordIsSelected(selectedKeyword)) {
-                    if (DialogManager.showConfirmDialog(MainController.TEXT_WARNING, MainController.TEXT_CONFIRM +
+                    if (DialogManager.showConfirmDialog(MainController.WARNING_TEXT, MainController.CONFIRM_TEXT +
                             selectedKeyword.getName() + "\"?")) {
                         keywordsCatalogImpl.delete(selectedKeyword);
                     }
@@ -139,7 +139,7 @@ public class KeywordsController {
 
     private boolean keywordIsSelected(Keyword selectedKeyword) {
         if (selectedKeyword == null) {
-            DialogManager.showInfoDialog(MainController.TEXT_ERROR, MainController.TEXT_SELECT_RECORD);
+            DialogManager.showInfoDialog(MainController.ERROR_TEXT, MainController.SELECT_RECORD_TEXT);
             return false;
         }
         return true;
@@ -151,7 +151,7 @@ public class KeywordsController {
         Keyword oldValue = (Keyword) mainTable.getSelectionModel().getSelectedItem();
         Keyword newValue = new Keyword(oldValue.getId(), oldValue.getName(), oldValue.getPerson());
         editKeywordController.setKeyword(newValue);
-        if (showDialog(MainController.TEXT_TITLE_EDIT) == ModalResult.MD_SAVE) {
+        if (showDialog(MainController.TITLE_EDIT_TEXT) == ModalResult.MD_SAVE) {
             keywordsCatalogImpl.update(oldValue, newValue);
         }
     }

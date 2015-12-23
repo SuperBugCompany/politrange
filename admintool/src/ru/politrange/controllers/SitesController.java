@@ -1,6 +1,5 @@
 package ru.politrange.controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -100,7 +99,7 @@ public class SitesController {
         switch (clickedButton.getId()) {
             case "btnAdd":
                 editSiteController.setSite(new Site());
-                if (showDialog(MainController.TEXT_TITLE_ADD) == ModalResult.MD_SAVE) {
+                if (showDialog(MainController.TITLE_ADD_TEXT) == ModalResult.MD_SAVE) {
                     sitesCatalogImpl.add(editSiteController.getSite());
                 }
                 break;
@@ -113,7 +112,7 @@ public class SitesController {
 
             case "btnDelete":
                 if (siteIsSelected(selectedSite)) {
-                    if (DialogManager.showConfirmDialog(MainController.TEXT_WARNING, MainController.TEXT_CONFIRM +
+                    if (DialogManager.showConfirmDialog(MainController.WARNING_TEXT, MainController.CONFIRM_TEXT +
                             selectedSite.getName() + "\"?")) {
                         sitesCatalogImpl.delete(selectedSite);
                     }
@@ -124,7 +123,7 @@ public class SitesController {
 
     private boolean siteIsSelected(Site selectedSite) {
         if (selectedSite == null) {
-            DialogManager.showInfoDialog(MainController.TEXT_ERROR, MainController.TEXT_SELECT_RECORD);
+            DialogManager.showInfoDialog(MainController.ERROR_TEXT, MainController.SELECT_RECORD_TEXT);
             return false;
         }
         return true;
@@ -136,7 +135,7 @@ public class SitesController {
         Site oldValue = (Site) mainTable.getSelectionModel().getSelectedItem();
         Site newValue = new Site(oldValue.getId(), oldValue.getName());
         editSiteController.setSite(newValue);
-        if (showDialog(MainController.TEXT_TITLE_EDIT) == ModalResult.MD_SAVE) {
+        if (showDialog(MainController.TITLE_EDIT_TEXT) == ModalResult.MD_SAVE) {
             sitesCatalogImpl.update(oldValue, newValue);
         }
     }
