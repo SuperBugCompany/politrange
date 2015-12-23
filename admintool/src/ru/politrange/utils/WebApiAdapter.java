@@ -28,8 +28,10 @@ public class WebApiAdapter {
     public static final String CONTENT_TYPE_JSON = "application/json; charset=" + DEFAULT_CHARSET;
     public static final String TITLE_CONNECT_TEXT = "Настройка соединения...";
     public static final String ERROR_CONNECT_TEXT = "Потеряно соединение с сервисом, введите \n новый адрес или нажмите \"Отмена\"";
+    public static final String HTTP_LOCALHOST_10101 = "http://localhost:10101";
+    public static final String FILE_ADMINTOOL_INI = "admintool.ini";
 
-    private String url = "http://localhost:10101";
+    private String url;
     private String selectPrefix;
     private String updatePrefix;
 
@@ -42,8 +44,44 @@ public class WebApiAdapter {
         this.updatePrefix = updatePrefix;
     }
 
+    public String getUrl() {
+        if (url == null) {
+            url = loadHttpAddressFromFile();
+            if (url == null) {
+                url = HTTP_LOCALHOST_10101;
+            }
+        }
+        return url;
+    }
+
+    private String loadHttpAddressFromFile() {
+        String result = null;
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(FILE_ADMINTOOL_INI));
+            result = reader.readLine();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public void setUrl(String url) {
+        saveHttpAddressToFile(url);
         this.url = url;
+    }
+
+    private void saveHttpAddressToFile(String url) {
+        try {
+            FileWriter fileWriter = new FileWriter(FILE_ADMINTOOL_INI);
+            fileWriter.write(url);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private boolean enterNewConnectionString() {
@@ -165,11 +203,11 @@ public class WebApiAdapter {
     }
 
     private URI getFullUrl(String params) throws URISyntaxException {
-        return new URI(url + selectPrefix + (params == null ? "" : params));
+        return new URI(getUrl() + selectPrefix + (params == null ? "" : params));
     }
 
     private URI getFullUpdateUrl(String params) throws URISyntaxException {
-        return new URI(url + (updatePrefix == null ? selectPrefix : updatePrefix) + (params == null ? "" : params));
+        return new URI(getUrl() + (updatePrefix == null ? selectPrefix : updatePrefix) + (params == null ? "" : params));
     }
 
     private boolean getStatusRequest(int statusCode) {
