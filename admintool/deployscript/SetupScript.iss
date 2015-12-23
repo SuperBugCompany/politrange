@@ -24,7 +24,7 @@ DefaultGroupName=PolitRange
 AllowNoIcons=yes
 InfoBeforeFile=D:\politrange\admintool\deployscript\requirements.txt
 OutputBaseFilename=SetupPolitRangeAdminTool
-SetupIconFile=D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\admintool.ico
+SetupIconFile=D:\politrange\admintool\src\resources\admintool.ico
 ;lzma
 Compression= lzma
 SolidCompression=yes
