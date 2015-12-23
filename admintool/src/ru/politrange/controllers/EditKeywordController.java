@@ -49,7 +49,7 @@ public class EditKeywordController {
     private boolean checkValues() {
 
         if (txtName.getText().trim().length() == 0) {
-            DialogManager.showInfoDialog(MainController.TEXT_ERROR, MainController.TEXT_FILL_FIELDS);
+            DialogManager.showInfoDialog(MainController.ERROR_TEXT, MainController.FILL_FIELDS_TEXT);
             return false;
         }
         return true;

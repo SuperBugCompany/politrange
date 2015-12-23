@@ -45,11 +45,13 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
                 keyword.setName((String) jsonObject.get("name"));
                 catalogList.add(keyword);
             } else {
-                DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка...");
+                DialogManager.outOfService();
             }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         } catch (ParseException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
     }
@@ -64,9 +66,10 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
                 oldValue.setName(newValue.getName());
                 return true;
             } else {
-                DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка обновления...");
+                DialogManager.outOfService();
             }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
         return false;
@@ -78,10 +81,11 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
             if (apiAdapter.delete(String.valueOf(keyword.getId()))) {
                 catalogList.remove(keyword);
             } else {
-                DialogManager.showErrorDialog("Ошибка", "Неизвестная ошибка удаления...");
+                DialogManager.outOfService();
             }
 
     } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
     }
@@ -101,9 +105,11 @@ public class KeywordsCatalog implements ICatalog <Keyword> {
                 catalogList.add(new Keyword((int) (long) o.get("keywordId"), (String) o.get("name"),person));
             }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
 
         } catch (ParseException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
     }

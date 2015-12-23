@@ -37,9 +37,10 @@ public class PersonsCatalog implements ICatalog<Person> {
                 person.setName((String) jsonObject.get("name"));
                 catalogList.add(person);
             } else {
-                DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка...");
+                DialogManager.outOfService();
             }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
@@ -57,9 +58,10 @@ public class PersonsCatalog implements ICatalog<Person> {
                 oldValue.setName(newValue.getName());
                 return true;
             } else {
-                DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка обновления...");
+                DialogManager.outOfService();
             }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
         return false;
@@ -72,6 +74,7 @@ public class PersonsCatalog implements ICatalog<Person> {
                 catalogList.remove(person);
             }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
     }
@@ -84,17 +87,18 @@ public class PersonsCatalog implements ICatalog<Person> {
         JSONArray jsonObject = null;
         try {
             jsonObject = (JSONArray) new JSONParser().parse(apiAdapter.select(null));
+            catalogList.clear();
+            Iterator<JSONObject> iterator = jsonObject.iterator();
+            while (iterator.hasNext()) {
+                JSONObject o = iterator.next();
+                catalogList.add(new Person((int) (long) o.get("personId"), (String) o.get("name")));
+            }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
-
         } catch (ParseException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
-        }
-        catalogList.clear();
-        Iterator<JSONObject> iterator = jsonObject.iterator();
-        while (iterator.hasNext()) {
-            JSONObject o = iterator.next();
-            catalogList.add(new Person((int) (long) o.get("personId"), (String) o.get("name")));
         }
     }
 }

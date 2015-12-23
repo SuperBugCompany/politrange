@@ -102,7 +102,7 @@ public class PersonsController {
         switch (clickedButton.getId()) {
             case "btnAdd":
                 editPersonController.setPerson(new Person());
-                if (showDialog(MainController.TEXT_TITLE_ADD) == ModalResult.MD_SAVE) {
+                if (showDialog(MainController.TITLE_ADD_TEXT) == ModalResult.MD_SAVE) {
                     personsCatalogImpl.add(editPersonController.getPerson());
                 }
                 break;
@@ -115,7 +115,7 @@ public class PersonsController {
 
             case "btnDelete":
                 if (personIsSelected(selectedPerson)) {
-                    if (DialogManager.showConfirmDialog(MainController.TEXT_WARNING, MainController.TEXT_CONFIRM +
+                    if (DialogManager.showConfirmDialog(MainController.WARNING_TEXT, MainController.CONFIRM_TEXT +
                             selectedPerson.getName() + "\"?")) {
                         personsCatalogImpl.delete(selectedPerson);
                     }
@@ -125,7 +125,7 @@ public class PersonsController {
     }
     private boolean personIsSelected(Person selectedPerson) {
         if(selectedPerson == null){
-            DialogManager.showInfoDialog(MainController.TEXT_ERROR, MainController.TEXT_SELECT_RECORD);
+            DialogManager.showInfoDialog(MainController.ERROR_TEXT, MainController.SELECT_RECORD_TEXT);
             return false;
         }
         return true;
@@ -137,7 +137,7 @@ public class PersonsController {
         Person oldPerson = (Person) mainTable.getSelectionModel().getSelectedItem();
         Person newPerson = new Person(oldPerson.getId(), oldPerson.getName());
         editPersonController.setPerson(newPerson);
-        if (showDialog(MainController.TEXT_TITLE_EDIT) == ModalResult.MD_SAVE) {
+        if (showDialog(MainController.TITLE_EDIT_TEXT) == ModalResult.MD_SAVE) {
             personsCatalogImpl.update(oldPerson,newPerson);
         }
 

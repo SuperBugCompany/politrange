@@ -36,11 +36,13 @@ public class SitesCatalog implements ICatalog<Site> {
                 site.setName((String) jsonObject.get("name"));
                 catalogList.add(site);
             } else {
-                DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка...");
+                DialogManager.outOfService();
             }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         } catch (ParseException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
     }
@@ -56,9 +58,10 @@ public class SitesCatalog implements ICatalog<Site> {
                 oldValue.setName(newValue.getName());
                 return true;
             } else {
-                DialogManager.showErrorDialog("Ошибка","Неизвестная ошибка обновления...");
+                DialogManager.outOfService();
             }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
         return false;
@@ -82,17 +85,19 @@ public class SitesCatalog implements ICatalog<Site> {
         JSONArray jsonObject = null;
         try {
             jsonObject = (JSONArray) new JSONParser().parse(apiAdapter.select(null));
+            catalogList.clear();
+            Iterator<JSONObject> iterator = jsonObject.iterator();
+            while (iterator.hasNext()) {
+                JSONObject o = iterator.next();
+                catalogList.add(new Site((int) (long) o.get("siteId"), (String) o.get("name")));
+            }
         } catch (IOException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
 
         } catch (ParseException e) {
+            DialogManager.outOfService();
             e.printStackTrace();
-        }
-        catalogList.clear();
-        Iterator<JSONObject> iterator = jsonObject.iterator();
-        while (iterator.hasNext()) {
-            JSONObject o = iterator.next();
-            catalogList.add(new Site((int) (long) o.get("siteId"), (String) o.get("name")));
         }
     }
 

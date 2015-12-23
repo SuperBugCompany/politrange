@@ -10,17 +10,18 @@ import javafx.stage.Stage;
 import ru.politrange.interfaces.impls.PersonsCatalog;
 import ru.politrange.interfaces.impls.SitesCatalog;
 import ru.politrange.start.Main;
+import ru.politrange.utils.DialogManager;
 
 import java.io.InputStream;
 
 public class MainController {
-    public static final String TEXT_TITLE_EDIT = "Редактировать запись..."; // #good_code_3 пишем без ошибок
-    public static final String TEXT_TITLE_ADD = "Новая запись...";
-    public static final String TEXT_ERROR = "Ошибка";
-    public static final String TEXT_SELECT_RECORD = "Выберите запись...";
-    public static final String TEXT_WARNING = "Предупреждение";
-    public static final String TEXT_FILL_FIELDS = "Заполните все поля...";
-    public static final String TEXT_CONFIRM = "Вы действительно хотите удалить запись \"";
+    public static final String TITLE_EDIT_TEXT = "Редактировать запись..."; // #good_code_3 пишем без ошибок
+    public static final String TITLE_ADD_TEXT = "Новая запись...";
+    public static final String ERROR_TEXT = "Ошибка";
+    public static final String SELECT_RECORD_TEXT = "Выберите запись...";
+    public static final String WARNING_TEXT = "Предупреждение";
+    public static final String FILL_FIELDS_TEXT = "Заполните все поля...";
+    public static final String CONFIRM_TEXT = "Вы действительно хотите удалить запись \"";
     public static final int DOUBLE_CLICK = 2; // #good_code_9 нет магическим символам
 
     public AnchorPane rightPanel;
@@ -60,6 +61,7 @@ public class MainController {
             personsController.setMainStage(mainStage);
             personsController.setDataSource(new PersonsCatalog());
         } catch (Exception e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
     }
@@ -70,6 +72,7 @@ public class MainController {
             keywordsController.setMainStage(mainStage);
             keywordsController.setDataSource(new PersonsCatalog());
         } catch (Exception e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
 
@@ -81,6 +84,7 @@ public class MainController {
             sitesController.setMainStage(mainStage);
             sitesController.setDataSource(new SitesCatalog());
         } catch (Exception e) {
+            DialogManager.outOfService();
             e.printStackTrace();
         }
     }
