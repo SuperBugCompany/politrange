@@ -4,6 +4,10 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTabHost;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -13,32 +17,26 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.nortti.politrange.views.DailyFragment;
+import com.example.nortti.politrange.views.GeneralFragment;
 
+public class MainActivity extends ActionBarActivity {
+    private FragmentTabHost mTabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TabHost tabs = (TabHost) findViewById(R.id.tabHost);
+        mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
+        mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-        tabs.setup();
-
-        TabHost.TabSpec spec = tabs.newTabSpec("tag1");
-
-        spec.setContent(R.id.tab1);
-        spec.setIndicator(getResources().getString(R.string.general));
-        tabs.addTab(spec);
-
-        spec = tabs.newTabSpec("tag2");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator(getResources().getString(R.string.daily));
-        tabs.addTab(spec);
-
-        tabs.setCurrentTab(0);
-
-
+        mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator(getResources().getString(R.string.general)),
+                GeneralFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator(getResources().getString(R.string.daily)),
+                DailyFragment.class, null);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     @Override

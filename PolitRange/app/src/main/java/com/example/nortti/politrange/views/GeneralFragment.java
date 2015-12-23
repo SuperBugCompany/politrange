@@ -1,8 +1,13 @@
 package com.example.nortti.politrange.views;
 
-import android.app.Fragment;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,34 +34,32 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
     private View header;
     private ICatalog siteCatalogImpl;
     private ICatalog personCatalogImpl;
-
+    public int Num;
 
     public void setSpinnerSource(ICatalog siteCatalogImpl) {
         this.siteCatalogImpl = siteCatalogImpl;
         spinData();
     }
 
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.general_fragment, null);
+                             Bundle savedInstanceState)
+    {
+        View v = inflater.inflate(R.layout.general_fragment, container,false);
 
         header = inflater.inflate(R.layout.gen_head, null);
 
-        spinner = (Spinner) v.findViewById(R.id.spinner);
+        spinner = (Spinner) v.findViewById(R.id.wSpin);
         spinner.setOnItemSelectedListener(this);
         genApply = (Button) v.findViewById(R.id.genApply);
         genApply.setOnClickListener(this);
 
         genList = (ListView) v.findViewById(R.id.genList);
         genList.addHeaderView(header);
-        setSpinnerSource(new SitesCatalog());
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        this.setSpinnerSource(new SitesCatalog());
+        Intent i = new Intent();
+        i.putExtra("spin", spinner.getSelectedItemPosition()+1);
         return v;
     }
-
 
     private void spinData() {
         siteCatalogImpl.populateData();
@@ -68,9 +71,6 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
         personCatalogImpl.populateData();
         genList.setAdapter(new GenAdapter(getActivity(), personCatalogImpl.getCatalogList()));
     }
-
-
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

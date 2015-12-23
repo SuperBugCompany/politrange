@@ -53,8 +53,8 @@ public class SiteAdapter extends BaseAdapter {
         TextView tvTitle = (TextView) v.findViewById(R.id.siteTitle);
         tvTitle.setText(s.getName());
 
-        ImageView imgLogo = (ImageView) v.findViewById(R.id.imgLogo);
-        imgLogo.setImageResource(s.getPic_id());
+       // ImageView imgLogo = (ImageView) v.findViewById(R.id.imgLogo);
+        //imgLogo.setImageResource(s.getPic_id());
 
     }
 }

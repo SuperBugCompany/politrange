@@ -13,7 +13,7 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner"
+            android:id="@+id/wSpin"
             android:layout_weight="1"
             android:layout_marginBottom="10dp" />
 
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/since"
                 android:id="@+id/textView"
-                android:layout_below="@+id/spinner"
+                android:layout_below="@+id/wSpin"
                 android:textStyle="bold"
                 android:layout_alignParentLeft="true"
                 android:layout_marginRight="5dp"

@@ -1,65 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.nortti.politrange.MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="match_parent" android:layout_width="match_parent">
 
-    <TabHost
+    <android.support.v4.app.FragmentTabHost
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tabHost">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <TabWidget
                 android:id="@android:id/tabs"
+
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:foregroundGravity="center_horizontal"
-                android:layout_gravity="center_horizontal"
-                android:textAlignment="gravity"></TabWidget>
+                android:layout_weight="0"/>
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0"/>
+
+            <FrameLayout
+                android:id="@+id/realtabcontent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
-                <LinearLayout
-                    android:id="@+id/tab1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <fragment
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:name="com.example.nortti.politrange.views.GeneralFragment"
-                        android:id="@+id/fragment"
-                        tools:layout="@layout/general_fragment" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tab2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <fragment
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:name="com.example.nortti.politrange.views.DailyFragment"
-                        android:id="@+id/fragment2"
-                        tools:layout="@layout/daily_fragment" />
-                </LinearLayout>
-
-            </FrameLayout>
         </LinearLayout>
-    </TabHost>
-
-
-</RelativeLayout>
+    </android.support.v4.app.FragmentTabHost>
+</LinearLayout>

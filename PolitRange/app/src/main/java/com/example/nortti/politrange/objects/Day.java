@@ -14,6 +14,7 @@ public class Day {
     private int dayNum;
     private Site site;
 
+
     public Day(int id, String url, int siteId, String dayDateTime, int dayNum) {
         this.id = id;
         this.url = url;
@@ -21,6 +22,8 @@ public class Day {
         this.dayDateTime = dayDateTime;
         this.dayNum = dayNum;
     }
+
+    public Day(){};
 
     public int getId() {
         return id;

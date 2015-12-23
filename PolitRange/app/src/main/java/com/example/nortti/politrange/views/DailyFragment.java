@@ -1,8 +1,9 @@
 package com.example.nortti.politrange.views;
 
-import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,7 +39,6 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     private EditText etSince;
     private EditText etTo;
     private SiteAdapter adapter;
-    FragmentTransaction ft;
     private View header;
     private View footer;
     private String[] dayName;
@@ -49,6 +49,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     private int Summ;
     private ICatalog sitesCatalogImpl;
     private ICatalog daysCatalogImpl;
+    FragmentManager fm;
 
 
     public void setDataSource(ICatalog sitesCatalogImpl) {
@@ -59,9 +60,8 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.daily_fragment, null);
-        ft = getFragmentManager().beginTransaction();
 
-
+        fm = getActivity().getFragmentManager();
         days = new ArrayList<Day>();
         dayName = getResources().getStringArray(R.array.date);
         dayApply = (Button) v.findViewById(R.id.butApply);
@@ -84,7 +84,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
         dayList.addHeaderView(header);
         dayList.addFooterView(footer);
 
-        spinner = (Spinner) v.findViewById(R.id.spinner);
+        spinner = (Spinner) v.findViewById(R.id.wSpin);
         spinner.setOnItemSelectedListener(this);
 
 
@@ -122,12 +122,12 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
         switch (v.getId()) {
             case R.id.butSince:
                 SinceDate sinceDate = new SinceDate();
-                sinceDate.show(getFragmentManager(), "datePicker");
+                sinceDate.show(fm,"datePicker");
 
                 break;
             case R.id.butTo:
                 ToDate toDate = new ToDate();
-                toDate.show(getFragmentManager(),"datePicker");
+                toDate.show(fm,"datePicker");
                 break;
             case R.id.butApply:
                 listData((Site)sitesCatalogImpl.getCatalogList().get(siteIndex));

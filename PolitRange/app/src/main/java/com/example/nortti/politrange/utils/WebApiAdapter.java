@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
 
 public class WebApiAdapter {
     public static final int HTTP_200_OK = 200;
-    private final String url = "http://194.12.123.155:10101/politrange/";
+    private final String url = "http://194.12.123.155:10101/politrange";
     private String prefix;
 
     public WebApiAdapter(String prefix) {
