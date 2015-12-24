@@ -103,6 +103,8 @@ public class WebApiAdapter {
             response = httpClient.execute(request);
             if (getStatusRequest(response.getStatusLine().getStatusCode())) {
                 result = getResultContent(response);
+            } else if (enterNewConnectionString()) {
+                result = select(param);
             }
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -129,6 +131,8 @@ public class WebApiAdapter {
             HttpResponse response = httpClient.execute(request);
             if (getStatusRequest(response.getStatusLine().getStatusCode())) {
                 result = getResultContent(response);
+            } else if (enterNewConnectionString()) {
+                result = insert(json);
             }
             return result;
         } catch (URISyntaxException e) {
@@ -152,7 +156,11 @@ public class WebApiAdapter {
             params.setContentType(CONTENT_TYPE_JSON);
             request.setEntity(params);
             HttpResponse response = httpClient.execute(request);
-            return (getStatusRequest(response.getStatusLine().getStatusCode()));
+            if  (getStatusRequest(response.getStatusLine().getStatusCode())) {
+                return true;
+            } else if (enterNewConnectionString()) {
+                return update(json, param);
+            }
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -170,7 +178,11 @@ public class WebApiAdapter {
         try {
             HttpDelete request = new HttpDelete(getFullUpdateUrl(param));
             HttpResponse response = httpClient.execute(request);
-            return getStatusRequest(response.getStatusLine().getStatusCode());
+            if (getStatusRequest(response.getStatusLine().getStatusCode())) {
+                return true;
+            } else if (enterNewConnectionString()) {
+                return delete(param);
+            }
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (IOException e) {
