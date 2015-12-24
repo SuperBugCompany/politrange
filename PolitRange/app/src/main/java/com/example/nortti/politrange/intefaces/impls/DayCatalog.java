@@ -34,7 +34,7 @@ public class DayCatalog implements ICatalog{
         this.site = site;
         sinceDate = new SinceDate();
         toDate = new ToDate();
-        COMMAND_PREFIX += String.valueOf(site.getId())+"?begin="+sinceDate.getFormattedDate().toString()+"&end="+toDate.getFormattedDate().toString();
+        COMMAND_PREFIX += String.valueOf(site.getId())+"?begin="+sinceDate.getFormattedDate()+"&end="+toDate.getFormattedDate();
         apiAdapter = new WebApiAdapter(COMMAND_PREFIX);
     }
 
