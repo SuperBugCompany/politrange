@@ -40,9 +40,9 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 [Files]
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\admintool.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\admintool.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\msvcp120.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\msvcp100.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\msvcr100.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\msvcr120.dll"; DestDir: "{app}"; Flags: ignoreversion
+;Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\msvcr100.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\packager.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\app\*"; DestDir: "{app}\app\"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "D:\politrange\admintool\out\artifacts\admintool\bundles\admintool\runtime\*"; DestDir: "{app}\runtime\"; Flags: ignoreversion recursesubdirs createallsubdirs
