@@ -36,8 +36,20 @@ body { padding-top: 70px; }
     width: 100%;
     margin: 0 auto;
 }
+
+.thumbnail  {
+    min-height: 265px;
+}
+
+
 @media (min-width: 768px) {
     #androidCarousel {
         width: 60rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .thumbnail{
+        padding-top: 22px;
     }
 }
