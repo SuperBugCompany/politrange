@@ -30,11 +30,11 @@ public class DayCatalog implements ICatalog{
     SinceDate sinceDate;
     ToDate toDate;
 
-    public DayCatalog(Site site,SinceDate sinceDate, ToDate toDate) {
+    public DayCatalog(Site site) {
         this.site = site;
-        this.sinceDate = sinceDate;
-        this.toDate = toDate;
-        COMMAND_PREFIX += String.valueOf(site.getId())+"?begin="+sinceDate.getFormattedDate()+"&end="+toDate.getFormattedDate();
+        sinceDate = new SinceDate();
+        toDate = new ToDate();
+        COMMAND_PREFIX += String.valueOf(site.getId())+"?begin="+sinceDate.getFormattedDate().toString()+"&end="+toDate.getFormattedDate().toString();
         apiAdapter = new WebApiAdapter(COMMAND_PREFIX);
     }
 

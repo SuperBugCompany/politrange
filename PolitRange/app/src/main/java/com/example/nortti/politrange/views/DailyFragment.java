@@ -102,8 +102,8 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
 
     }
 
-    private void listData(Site site, SinceDate sinceDate, ToDate toDate){
-        daysCatalogImpl = new DayCatalog(site, sinceDate, toDate);
+    private void listData(Site site){
+        daysCatalogImpl = new DayCatalog(site);
         daysCatalogImpl.populateData();
         dayList.setAdapter(new DayAdapter(getActivity(), daysCatalogImpl.getCatalogList()));
     }
@@ -134,7 +134,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
                 toDate.show(fm,"datePicker");
                 break;
             case R.id.butApply:
-                listData((Site)sitesCatalogImpl.getCatalogList().get(siteIndex),(SinceDate)sitesCatalogImpl.getCatalogList().get(Integer.parseInt(beginDate)),(ToDate)sitesCatalogImpl.getCatalogList().get(Integer.parseInt(endDate)));
+                listData((Site)sitesCatalogImpl.getCatalogList().get(siteIndex));
                 break;
         }
     }
