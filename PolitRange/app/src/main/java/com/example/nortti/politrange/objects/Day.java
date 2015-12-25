@@ -1,21 +1,21 @@
 package com.example.nortti.politrange.objects;
 
 public class Day {
-    private String foundDateTime;
+    private int foundDateTime;
 
     private int rank;
 
-    public Day(String foundDateTime, int rank) {
+    public Day(int foundDateTime, int rank) {
         this.foundDateTime = foundDateTime;
 
         this.rank = rank;
     }
 
-    public String getFoundDateTime() {
+    public int getFoundDateTime() {
         return foundDateTime;
     }
 
-    public void setFoundDateTime(String foundDateTime) {
+    public void setFoundDateTime(int foundDateTime) {
         this.foundDateTime = foundDateTime;
     }
 

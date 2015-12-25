@@ -1,6 +1,8 @@
 package com.example.nortti.politrange.utils;
 
 
+import android.widget.Toast;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -60,7 +62,9 @@ public class WebApiAdapter {
                 }
 
                 result = str.toString();
-            } finally {
+            }catch (Exception e) {
+
+            }finally {
                 reader.close();
             }
         }

@@ -33,7 +33,7 @@ public class ToDate extends DialogFragment
         Calendar c = Calendar.getInstance();
         c.set(year, month, day);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yy");
         formattedDate = sdf.format(c.getTime());
         EditText etTo = (EditText) getActivity().findViewById(R.id.etTo);
         etTo.setText(formattedDate);

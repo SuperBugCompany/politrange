@@ -29,9 +29,11 @@ public class DayCatalog implements ICatalog{
     Site site;
     SinceDate sinceDate;
     ToDate toDate;
+    SimpleDateFormat sdf;
 
     public DayCatalog(Site site) {
         this.site = site;
+
         sinceDate = new SinceDate();
         toDate = new ToDate();
         COMMAND_PREFIX += String.valueOf(site.getId())+"?begin="+sinceDate.getFormattedDate()+"&end="+toDate.getFormattedDate();
@@ -60,9 +62,9 @@ public class DayCatalog implements ICatalog{
 
         while (iterator.hasNext()){
             JSONObject o = iterator.next();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            sdf = new SimpleDateFormat("dd.MM.yyyy");
             dFormat = sdf.format(o.get("pageFoundDate"));
-            catalogList.add(new Day(dFormat,(int)(long)o.get("rank")));
+            catalogList.add(new Day((int)o.get("pageFoundDate"),(int)(long)o.get("rank")));
         }
     }
 }
