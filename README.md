@@ -9,7 +9,7 @@
 
 PR состоит из трех основных частей:
 
-* серверная часть  или поставщик данных –  веб-сервис ([ссылка] (https://github.com/SuperBugCompany/politrange.webapi/releases/download/v0.1.3/SuperBug.Politrange.WebApi-v.0.1.3.zip) для скачивания) и краулер ([ссылка] (https://github.com/SuperBugCompany/politrange.webapi/releases/download/v0.1.3/SuperBug.Politrange.Crawler-v0.1.3.zip) для скачивания);
+* серверная часть  или поставщик данных –  веб-сервис ([ссылка] (https://github.com/SuperBugCompany/politrange.webapi/releases/download/v0.1.4/SuperBug.Politrange.WebApi-v.0.1.4.zip) для скачивания) и краулер ([ссылка] (https://github.com/SuperBugCompany/politrange.webapi/releases/download/v0.1.4/SuperBug.Politrange.Crawler-v0.1.4.zip) для скачивания);
 * административная часть ([ссылка] (https://github.com/SuperBugCompany/politrange/releases/download/Admintool3/SetupPolitRangeAdminTool.zip) для скачивания);
 * аналитическая часть ([ссылка] (https://github.com/SuperBugCompany/politrange/releases/download/Android0.1/PolitRange.zip) для скачивания);
 
@@ -52,7 +52,7 @@ PR состоит из трех основных частей:
 По желанию покупателя **"PR"**, разработчики могут расширить спектр аналитических отчетов, а также увеличить количество входных данных для анализа. Приобретя **"PR"**, Вы получаете поддержку и внедрение, напрямую от разработчика. Также ждем предложений, по улучшению продукта и сотрудничества.
 
 PolitRange является проектом с открытым исходным кодом, тут вы можете скачать исходный код для:
-* веб-сервис и краулер ([ссылка] (https://github.com/SuperBugCompany/politrange.webapi/archive/v0.1.3.zip) для скачивания);
+* веб-сервис и краулер ([ссылка] (https://github.com/SuperBugCompany/politrange.webapi/archive/v0.1.4.zip) для скачивания);
 * административная часть ([ссылка] (https://github.com/SuperBugCompany/politrange/archive/Admintool3.zip) для скачивания);
 * аналитическая часть ([ссылка] (https://github.com/SuperBugCompany/politrange/archive/Android0.1.zip) для скачивания);
 
