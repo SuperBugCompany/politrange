@@ -32,13 +32,14 @@ public class SinceDate extends DialogFragment
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Calendar c = Calendar.getInstance();
         c.set(year, month, day);
-        sdf = new SimpleDateFormat("MM.dd.yy");
+        sdf = new SimpleDateFormat("dd.MM.yyyy");
         formattedDate = sdf.format(c.getTime());
         EditText etSince = (EditText) getActivity().findViewById(R.id.etSince);
         etSince.setText(formattedDate);
     }
 
     public String getFormattedDate() {
+        this.formattedDate = formattedDate;
         return formattedDate;
     }
 }

@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.nortti.politrange.R;
 
@@ -16,7 +17,7 @@ import java.util.Calendar;
 public class ToDate extends DialogFragment
         implements DatePickerDialog.OnDateSetListener{
 
-    String formattedDate;
+    public String formattedDate;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
@@ -33,10 +34,11 @@ public class ToDate extends DialogFragment
         Calendar c = Calendar.getInstance();
         c.set(year, month, day);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         formattedDate = sdf.format(c.getTime());
         EditText etTo = (EditText) getActivity().findViewById(R.id.etTo);
         etTo.setText(formattedDate);
+        Toast.makeText(getActivity(),formattedDate,Toast.LENGTH_LONG).show();
     }
 
     public String getFormattedDate() {

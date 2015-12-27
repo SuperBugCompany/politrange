@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nortti.politrange.R;
 import com.example.nortti.politrange.adapters.DayAdapter;
@@ -121,8 +123,10 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     @Override
     public void onClick(View v) {
         int siteIndex = spinner.getSelectedItemPosition();
-        String beginDate = etSince.getText().toString().trim();
-        String endDate = etTo.getText().toString().trim();
+        String beginDate = etSince.getText().toString();
+//        long date = Date.parse(beginDate);
+        String endDate = etTo.getText().toString();
+       // long date1 = Date.parse(endDate);
         switch (v.getId()) {
             case R.id.butSince:
                 SinceDate sinceDate = new SinceDate();
@@ -131,7 +135,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
                 break;
             case R.id.butTo:
                 ToDate toDate = new ToDate();
-                toDate.show(fm,"datePicker");
+                toDate.show(fm, "datePicker");
                 break;
             case R.id.butApply:
                 listData((Site)sitesCatalogImpl.getCatalogList().get(siteIndex));

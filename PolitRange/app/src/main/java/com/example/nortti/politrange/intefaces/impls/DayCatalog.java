@@ -1,12 +1,19 @@
 package com.example.nortti.politrange.intefaces.impls;
 
+import android.app.FragmentManager;
+import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.nortti.politrange.R;
 import com.example.nortti.politrange.objects.Day;
 import com.example.nortti.politrange.intefaces.ICatalog;
 import com.example.nortti.politrange.objects.Person;
 import com.example.nortti.politrange.objects.Site;
 import com.example.nortti.politrange.utils.WebApiAdapter;
+import com.example.nortti.politrange.views.DailyFragment;
 import com.example.nortti.politrange.views.GeneralFragment;
 import com.example.nortti.politrange.views.SinceDate;
 import com.example.nortti.politrange.views.ToDate;
@@ -25,18 +32,17 @@ public class DayCatalog implements ICatalog{
     private String COMMAND_PREFIX = "/api/stats/";
     private final WebApiAdapter apiAdapter;
     private ArrayList<Day> catalogList = new ArrayList<Day>();
-    String dFormat;
     Site site;
-    SinceDate sinceDate;
+    ViewGroup cont;
+
     ToDate toDate;
-    SimpleDateFormat sdf;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
     public DayCatalog(Site site) {
+        SinceDate sinceDate = new SinceDate();
         this.site = site;
-
-        sinceDate = new SinceDate();
-        toDate = new ToDate();
-        COMMAND_PREFIX += String.valueOf(site.getId())+"?begin="+sinceDate.getFormattedDate()+"&end="+toDate.getFormattedDate();
+       String date1 = sinceDate.getFormattedDate();
+        COMMAND_PREFIX += String.valueOf(site.getId())+"?begin="+date1+"&end=12.11.2016";
         apiAdapter = new WebApiAdapter(COMMAND_PREFIX);
     }
 
@@ -62,9 +68,7 @@ public class DayCatalog implements ICatalog{
 
         while (iterator.hasNext()){
             JSONObject o = iterator.next();
-            sdf = new SimpleDateFormat("dd.MM.yyyy");
-            dFormat = sdf.format(o.get("pageFoundDate"));
-            catalogList.add(new Day((int)o.get("pageFoundDate"),(int)(long)o.get("rank")));
+            catalogList.add(new Day((String)o.get("pageFoundDate"),(int)(long)o.get("rank")));
         }
     }
 }
