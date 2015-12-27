@@ -88,7 +88,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
 
         dayList = (ListView) v.findViewById(R.id.dayList);
         dayList.addHeaderView(header);
-        dayList.addFooterView(footer);
+        //dayList.addFooterView(footer);
 
         spinner = (Spinner) v.findViewById(R.id.wSpin);
         spinner.setOnItemSelectedListener(this);
@@ -107,7 +107,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     }
 
     private void listData(Site site){
-        daysCatalogImpl = new DayCatalog(site, etSince.getText().toString(),etTo.getText().toString());
+        daysCatalogImpl = new DayCatalog(site, sinceDate.getFormattedDate(),toDate.getFormattedDate());
         daysCatalogImpl.populateData();
         dayList.setAdapter(new DayAdapter(getActivity(), daysCatalogImpl.getCatalogList()));
     }

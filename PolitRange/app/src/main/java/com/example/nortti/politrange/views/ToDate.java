@@ -17,7 +17,7 @@ import java.util.Calendar;
 public class ToDate extends DialogFragment
         implements DatePickerDialog.OnDateSetListener{
 
-    public String formattedDate;
+    String formattedDate, etText;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
@@ -34,11 +34,13 @@ public class ToDate extends DialogFragment
         Calendar c = Calendar.getInstance();
         c.set(year, month, day);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
         formattedDate = sdf.format(c.getTime());
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd.MM.yyyy");
         EditText etTo = (EditText) getActivity().findViewById(R.id.etTo);
-        etTo.setText(formattedDate);
-        Toast.makeText(getActivity(),formattedDate,Toast.LENGTH_LONG).show();
+        etText = sdf1.format(c.getTime());
+        etTo.setText(etText);
+
     }
 
     public String getFormattedDate() {

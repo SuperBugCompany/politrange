@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 public class SinceDate extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
-    String formattedDate;
+    String formattedDate, etText;
     String date;
     SimpleDateFormat sdf;
     @Override
@@ -32,10 +32,12 @@ public class SinceDate extends DialogFragment
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Calendar c = Calendar.getInstance();
         c.set(year, month, day);
-        sdf = new SimpleDateFormat("dd.MM.yyyy");
+        sdf = new SimpleDateFormat("MM.dd.yyyy");
         formattedDate = sdf.format(c.getTime());
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd.MM.yyyy");
         EditText etSince = (EditText) getActivity().findViewById(R.id.etSince);
-        etSince.setText(formattedDate);
+        etText = sdf1.format(c.getTime());
+        etSince.setText(etText);
     }
 
     public String getFormattedDate() {

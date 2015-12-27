@@ -3,6 +3,7 @@ package com.example.nortti.politrange.intefaces.impls;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -24,13 +25,17 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 
 public class DayCatalog implements ICatalog{
     private String COMMAND_PREFIX = "/api/stats/";
     private final WebApiAdapter apiAdapter;
+    private static final String TAG = "myLogs";
     private ArrayList<Day> catalogList = new ArrayList<Day>();
     String SinceDate;
     String ToDate;
@@ -50,7 +55,7 @@ public class DayCatalog implements ICatalog{
     }
 
     @Override
-    public void populateData() {
+    public void populateData(){
         JSONArray jsonObject = null;
 
         try {
@@ -66,7 +71,20 @@ public class DayCatalog implements ICatalog{
 
         while (iterator.hasNext()){
             JSONObject o = iterator.next();
-            catalogList.add(new Day((String)o.get("pageFoundDate"),(int)(long)o.get("rank")));
+            String date = o.get("pageFoundDate").toString();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
+            SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
+            String dd = null;
+            Date date1 = null;
+            try {
+                date1 = format.parse(date);
+                dd = format1.format(date1);
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+
+           // Log.d(TAG, dd);
+            catalogList.add(new Day(dd,(int)(long)o.get("rank")));
         }
     }
 }
