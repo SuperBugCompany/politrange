@@ -19,4 +19,13 @@
 
     </style>
 
+    <style name="but">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/but_sel</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">#dadada</item>
+        <item name="android:layout_below">@+id/frame1</item>
+    </style>
+
 </resources>

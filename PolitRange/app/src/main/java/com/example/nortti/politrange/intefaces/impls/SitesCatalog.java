@@ -2,8 +2,6 @@ package com.example.nortti.politrange.intefaces.impls;
 
 
 import com.example.nortti.politrange.intefaces.ICatalog;
-import com.example.nortti.politrange.R;
-import com.example.nortti.politrange.objects.Person;
 import com.example.nortti.politrange.objects.Site;
 import com.example.nortti.politrange.utils.WebApiAdapter;
 
@@ -22,7 +20,7 @@ public class SitesCatalog implements ICatalog{
     private final WebApiAdapter siteAdapter = new WebApiAdapter(COMMAND_PREFIX);
     private ArrayList<Site> catalogList = new ArrayList<Site>();
 
-    public ArrayList<Site> getCatalogList() {
+    public ArrayList<Site> getDateList() {
         return catalogList;
     }
 

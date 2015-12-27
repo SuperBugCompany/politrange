@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface ICatalog<T> {
 
-    ArrayList <T> getCatalogList();
+    ArrayList <T> getDateList();
     void populateData();
 
 }

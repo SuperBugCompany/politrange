@@ -1,13 +1,10 @@
 package com.example.nortti.politrange.views;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -64,13 +61,13 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
 
     private void spinData() {
         siteCatalogImpl.populateData();
-        spinner.setAdapter(new SiteAdapter(getActivity(), siteCatalogImpl.getCatalogList()));
+        spinner.setAdapter(new SiteAdapter(getActivity(), siteCatalogImpl.getDateList()));
     }
 
     private void listData(Site site) {
         personCatalogImpl = new PersonCatalog(site);
         personCatalogImpl.populateData();
-        genList.setAdapter(new GenAdapter(getActivity(), personCatalogImpl.getCatalogList()));
+        genList.setAdapter(new GenAdapter(getActivity(), personCatalogImpl.getDateList()));
     }
 
 
@@ -90,7 +87,7 @@ public class GeneralFragment extends Fragment implements OnClickListener, OnItem
         int siteIndex = spinner.getSelectedItemPosition();
         switch (v.getId()) {
             case R.id.genApply:
-                listData((Site) siteCatalogImpl.getCatalogList().get(siteIndex));
+                listData((Site) siteCatalogImpl.getDateList().get(siteIndex));
                 break;
         }
     }

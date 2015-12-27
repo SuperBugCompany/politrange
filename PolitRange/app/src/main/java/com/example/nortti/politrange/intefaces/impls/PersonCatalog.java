@@ -1,20 +1,9 @@
 package com.example.nortti.politrange.intefaces.impls;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Spinner;
-
-import com.example.nortti.politrange.R;
 import com.example.nortti.politrange.intefaces.ICatalog;
 import com.example.nortti.politrange.objects.Person;
 import com.example.nortti.politrange.objects.Site;
 import com.example.nortti.politrange.utils.WebApiAdapter;
-import com.example.nortti.politrange.views.GeneralFragment;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -40,7 +29,7 @@ public class PersonCatalog implements ICatalog {
     }
 
     @Override
-    public ArrayList<Person> getCatalogList() {
+    public ArrayList<Person> getDateList() {
         return catalogList;
     }
 

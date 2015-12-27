@@ -119,24 +119,35 @@
             </FrameLayout>
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/apply"
-            android:id="@+id/butApply"
-            android:background="@drawable/but_sel"
-            android:padding="10dp"
-            android:textColor="#dadada"
-            android:layout_alignParentRight="false"
-            android:layout_below="@+id/frame1" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:text="@string/apply"
+                android:id="@+id/butApply"
+                android:layout_alignParentRight="false"
+                style="@style/but" />
+<SearchView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:layout_marginLeft="5dp"
+    android:goIcon="@drawable/search"
+    android:visibility="gone"></SearchView>
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
-    <ListView
+    <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dayList"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+
+         />
 
 </LinearLayout>

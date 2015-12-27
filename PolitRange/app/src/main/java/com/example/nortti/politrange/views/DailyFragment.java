@@ -1,10 +1,8 @@
 package com.example.nortti.politrange.views;
 
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,12 +11,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.nortti.politrange.R;
 import com.example.nortti.politrange.adapters.DayAdapter;
@@ -26,15 +23,15 @@ import com.example.nortti.politrange.adapters.SiteAdapter;
 import com.example.nortti.politrange.intefaces.ICatalog;
 import com.example.nortti.politrange.intefaces.impls.DayCatalog;
 import com.example.nortti.politrange.intefaces.impls.SitesCatalog;
-import com.example.nortti.politrange.objects.Day;
+import com.example.nortti.politrange.objects.DatePerson;
 import com.example.nortti.politrange.objects.Site;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DailyFragment extends Fragment implements OnClickListener,OnItemSelectedListener {
-    private ArrayList<Day> days;
+    public static final String TITLE = "Не найдена ссылка!";
+    public static final String MESSAGE = "Извините, сервис временно не доступен";
+    private ArrayList<DatePerson> dayPersons;
     private Spinner spinner;
     private FrameLayout frame1;
     private FrameLayout frame2;
@@ -47,7 +44,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     private View footer;
     private String[] dayName;
     private TextView sumInt;
-    private ListView dayList;
+    private ExpandableListView dayList;
     private DayAdapter dayAdapter;
     private Button dayApply;
     private int Summ;
@@ -68,13 +65,12 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
         View v = inflater.inflate(R.layout.daily_fragment, null);
 
         fm = getActivity().getFragmentManager();
-        days = new ArrayList<Day>();
+        dayPersons = new ArrayList<DatePerson>();
         dayName = getResources().getStringArray(R.array.date);
         dayApply = (Button) v.findViewById(R.id.butApply);
         dayApply.setOnClickListener(this);
-        header = inflater.inflate(R.layout.day_head, null);
-        footer = inflater.inflate(R.layout.day_foot, null);
-        sumInt = (TextView) footer.findViewById(R.id.summInt);
+
+
 
         frame1 = (FrameLayout) v.findViewById(R.id.frame1);
         butSince = (ImageButton) frame1.findViewById(R.id.butSince);
@@ -86,15 +82,14 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
         butTo.setOnClickListener(this);
         etTo = (EditText) frame2.findViewById(R.id.etTo);
 
-        dayList = (ListView) v.findViewById(R.id.dayList);
-        dayList.addHeaderView(header);
-        //dayList.addFooterView(footer);
+        dayList = (ExpandableListView) v.findViewById(R.id.dayList);
+
 
         spinner = (Spinner) v.findViewById(R.id.wSpin);
         spinner.setOnItemSelectedListener(this);
 
 
-        dayAdapter = new DayAdapter(getActivity(),days);
+        dayAdapter = new DayAdapter(getActivity(), dayPersons);
 
         setDataSource(new SitesCatalog());
         return v;
@@ -102,14 +97,14 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
 
     private void spinData() {
         sitesCatalogImpl.populateData();
-        spinner.setAdapter(new SiteAdapter(getActivity(), sitesCatalogImpl.getCatalogList()));
+        spinner.setAdapter(new SiteAdapter(getActivity(), sitesCatalogImpl.getDateList()));
 
     }
 
     private void listData(Site site){
         daysCatalogImpl = new DayCatalog(site, sinceDate.getFormattedDate(),toDate.getFormattedDate());
         daysCatalogImpl.populateData();
-        dayList.setAdapter(new DayAdapter(getActivity(), daysCatalogImpl.getCatalogList()));
+        dayList.setAdapter(new DayAdapter(getActivity(), daysCatalogImpl.getDateList()));
     }
 
     @Override
@@ -137,7 +132,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
 
                 break;
             case R.id.butApply:
-                listData((Site)sitesCatalogImpl.getCatalogList().get(siteIndex));
+                listData((Site)sitesCatalogImpl.getDateList().get(siteIndex));
                 break;
         }
     }
