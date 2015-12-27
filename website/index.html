@@ -39,7 +39,7 @@
                 <li><a href="#"><span class="glyphicon glyphicon-download-alt">&nbsp;</span>  Android app</a></li>
                 <li><a href="https://github.com/SuperBugCompany/politrange/releases/download/Admintool2/SetupPolitRangeAdminTool.zip">
                   <span class="glyphicon glyphicon-download-alt">&nbsp;</span>  Desktop app</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-download-alt">&nbsp;</span>  Web crawler</a></li>
+                <li><a href="https://github.com/SuperBugCompany/politrange.webapi/releases/latest"><span class="glyphicon glyphicon-download-alt">&nbsp;</span>  Web API</a></li>
               </ul>
             </li>
             <li><a href="https://github.com/SuperBugCompany/politrange.webapi"><span class="glyphicon glyphicon-link"></span> Web-service</a></li>
@@ -50,15 +50,17 @@
     <div class="container">
         <div class="row" id='project'>
             <div class="col-sm-12" >
-                <h2>О проекте PolitRange</h2>
-            Проект PolitRange - результат <a href="#team">нашей</a> командной стажировки на портале GeekBrains. Проект представляет собой программное решение для анализа и сравнения популярности выбранных медийных лиц, политиков (для примера – Путина, Медведева и Навального). Популярность оценивается количеством упоминаний в основных интернет-СМИ. Продукт, таким образом, состоит из 5 компонентов:
-            <ol>
-              <li><a href="#desktop">Приложение для администрирования системы</a> (в виде приложения для Desktop)</li>
-              <li><a href="#android">Пользовательское приложение</a> (в виде приложения для Android)</li>
-              <li>База данных</li>
-              <li><a href="#webservice">Веб-сервис</a> для связи пользовательского приложения с базой данных</li>
-              <li><a href="#crawler">Веб-кроулер</a>, непосредственно просматривающий новостные сайты и заполняющий базу данных. </li>
-            </ol>
+              <h2>О проекте PolitRange</h2>
+              Проект PolitRange - результат <a href="#team">нашей</a> командной стажировки на портале GeekBrains. Проект представляет собой программное решение для анализа и сравнения популярности выбранных медийных лиц, политиков (для примера – Путина, Медведева и Навального). Популярность оценивается количеством упоминаний в основных интернет-СМИ. Продукт, таким образом, состоит из 5 компонентов:
+              <ol>
+                <li><a href="#desktop">Приложение для администрирования системы</a> (в виде приложения для Desktop)</li>
+                <li><a href="#android">Пользовательское приложение</a> (в виде приложения для Android)</li>
+                <li>База данных</li>
+                <li><a href="#webservice">Веб-сервис</a> для связи пользовательского приложения с базой данных</li>
+                <li><a href="#crawler">Веб-кроулер</a>, непосредственно просматривающий новостные сайты и заполняющий базу данных. </li>
+              </ol>
+              
+              <a href="https://github.com/SuperBugCompany/politrange"><img src="img/GitHub-Mark-32px.png" height="32" width="32" alt="">&nbsp;Репозиторий</a> проекта на Github
             </div>
         </div>     
         <div class="row" id='team'>
@@ -104,7 +106,7 @@
                   </span>
                   <div class="caption">
                     <a href="http://geekbrains.ru/users/2113"><h4>Анастасия Хоревич</h4></a>
-                    <p>Разработка приложения для Android (Java), UI и UX дизайн</p>
+                    <p>Разработка приложения для Android (Java), UI</p>
                   </div>
                 </div>
               </div>
@@ -138,7 +140,7 @@
                     <p>Десктопное приложение представляет собой инструментарий администратора. Он включает в себя поддержку справочников "Persons", "Sites",  "Keywords". В справочник "Персоны"("Persons") вносятся личности, которые требуется отслеживать. Для каждой персоны в справочник "Ключевые слова"("Keywords") заносятся все морфологические формы имени, которые необходимо отслеживать. Например, для персоны "Путин" необходимо включать в статистику формы "Путину", "Путина", "Путине" и т.п. Наконец, справочник "Сайты" ("Sites") предназначен для управления списком анализируемых сайтов.</p>
 
                 <a href="https://github.com/SuperBugCompany/politrange/releases/download/Admintool2/SetupPolitRangeAdminTool.zip" class="btn btn-success"><span class="glyphicon glyphicon-download-alt"></span> Скачать</a>
-                
+                <a href="https://github.com/SuperBugCompany/politrange/releases/tag/Admintool3" class="btn btn-info"><span class="glyphicon glyphicon-console">&nbsp;</span>Исходный код (Github)</a>
 
             <div id="desktopCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
               <!-- Wrapper for slides -->
@@ -228,14 +230,24 @@
     <div class="row" id='crawler'>
         <div class="col-sm-12" >
             <h2>Веб-кроулер</h2>
-            Здесь будет описание и ссылка на Гитхаб
+            Краулер позицируется как бота, проверяет в базу данных наличием новых сайтов и старых страниц, которые старше одного дня. Далее разбирает ссылки из страниц и ищет в них наличие ключевых слов личностей.
+              <div class="text-center" style="margin-top: 20px; margin-bottom: 20px "><img src="img/screenshots/crawler/job_crawler.png" height="50%" width="50%" alt="web crawler"></div>
+              <div>
+                <a href="https://github.com/SuperBugCompany/politrange.webapi/releases/download/v0.1.6/SuperBug.Politrange.Crawler-v0.1.6.zip" class="btn btn-success"><span class="glyphicon glyphicon-download-alt"></span> Скачать (v0.1.6)</a>
+                <a href="https://github.com/SuperBugCompany/politrange.webapi/releases/latest" class="btn btn-info"><span class="glyphicon glyphicon-console">&nbsp;</span>Исходный код (Github)</a>
+              </div>
         </div>
         <br><br><br><br><br><br>
     </div>    
     <div class="row" id='webservice'>
         <div class="col-sm-12" >
             <h2>Веб-сервис</h2>
+            Веб-сервис позицируется как Restful Api, обрабатывает запросы http и возвращает данные в виде Json.
             Документация доступна по <a href="https://github.com/SuperBugCompany/politrange/wiki/%D0%92%D0%B5%D0%B1-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81#rest-api">ссылке</a>
+              <div>
+                <a href="https://github.com/SuperBugCompany/politrange.webapi/releases/download/v0.1.6/SuperBug.Politrange.WebApi-v.0.1.6.zip" class="btn btn-success"><span class="glyphicon glyphicon-download-alt"></span> Скачать (v0.1.6)</a>
+                <a href="https://github.com/SuperBugCompany/politrange.webapi/releases/latest" class="btn btn-info"><span class="glyphicon glyphicon-console">&nbsp;</span>Исходный код (Github)</a>
+              </div>
         </div>
         <br><br><br><br><br><br>
     </div>    
