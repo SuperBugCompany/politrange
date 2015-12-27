@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:background="#e1e1e1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/dateTit"
+    android:id="@+id/head"
+    android:layout_alignParentLeft="true"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="30dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="10dp" />
