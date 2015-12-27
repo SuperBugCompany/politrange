@@ -32,17 +32,15 @@ public class DayCatalog implements ICatalog{
     private String COMMAND_PREFIX = "/api/stats/";
     private final WebApiAdapter apiAdapter;
     private ArrayList<Day> catalogList = new ArrayList<Day>();
+    String SinceDate;
+    String ToDate;
     Site site;
-    ViewGroup cont;
 
-    ToDate toDate;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-
-    public DayCatalog(Site site) {
-        SinceDate sinceDate = new SinceDate();
+    public DayCatalog(Site site,String SinceDate, String ToDate) {
         this.site = site;
-       String date1 = sinceDate.getFormattedDate();
-        COMMAND_PREFIX += String.valueOf(site.getId())+"?begin="+date1+"&end=12.11.2016";
+        this.SinceDate = SinceDate;
+        this.ToDate = ToDate;
+        COMMAND_PREFIX += String.valueOf(site.getId())+"?begin="+String.valueOf(SinceDate)+"&end="+String.valueOf(ToDate);
         apiAdapter = new WebApiAdapter(COMMAND_PREFIX);
     }
 

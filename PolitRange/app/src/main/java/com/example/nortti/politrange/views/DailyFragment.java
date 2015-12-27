@@ -52,7 +52,9 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     private Button dayApply;
     private int Summ;
     private ICatalog sitesCatalogImpl;
-    private ICatalog daysCatalogImpl;
+    public ICatalog daysCatalogImpl;
+    SinceDate sinceDate;
+    ToDate toDate;
     FragmentManager fm;
 
 
@@ -105,7 +107,7 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     }
 
     private void listData(Site site){
-        daysCatalogImpl = new DayCatalog(site);
+        daysCatalogImpl = new DayCatalog(site, etSince.getText().toString(),etTo.getText().toString());
         daysCatalogImpl.populateData();
         dayList.setAdapter(new DayAdapter(getActivity(), daysCatalogImpl.getCatalogList()));
     }
@@ -123,19 +125,16 @@ public class DailyFragment extends Fragment implements OnClickListener,OnItemSel
     @Override
     public void onClick(View v) {
         int siteIndex = spinner.getSelectedItemPosition();
-        String beginDate = etSince.getText().toString();
-//        long date = Date.parse(beginDate);
-        String endDate = etTo.getText().toString();
-       // long date1 = Date.parse(endDate);
         switch (v.getId()) {
             case R.id.butSince:
-                SinceDate sinceDate = new SinceDate();
+                sinceDate = new SinceDate();
                 sinceDate.show(fm,"datePicker");
 
                 break;
             case R.id.butTo:
-                ToDate toDate = new ToDate();
+                toDate = new ToDate();
                 toDate.show(fm, "datePicker");
+
                 break;
             case R.id.butApply:
                 listData((Site)sitesCatalogImpl.getCatalogList().get(siteIndex));
