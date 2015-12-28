@@ -11,7 +11,7 @@ PR состоит из трех основных частей:
 
 * серверная часть  или поставщик данных –  веб-сервис ([ссылка] (https://github.com/SuperBugCompany/politrange.webapi/releases/download/v0.1.4/SuperBug.Politrange.WebApi-v.0.1.4.zip) для скачивания) и краулер ([ссылка] (https://github.com/SuperBugCompany/politrange.webapi/releases/download/v0.1.4/SuperBug.Politrange.Crawler-v0.1.4.zip) для скачивания);
 * административная часть ([ссылка] (https://github.com/SuperBugCompany/politrange/releases/download/Admintool3/SetupPolitRangeAdminTool.zip) для скачивания);
-* аналитическая часть ([ссылка] (https://github.com/SuperBugCompany/politrange/releases/download/Android0.1/PolitRange.zip) для скачивания);
+* аналитическая часть ([ссылка] (https://github.com/SuperBugCompany/politrange/releases/download/Android0.2/PolitRange.zip) для скачивания);
 
 **Серверная часть**, далее **«СЧ»** может быть размещена на компьютере Вашей компании, либо на хостинге в интернете.  **"СЧ"** работает, только под управлением Windows, не ниже Windows 7 и требует предустановленных **MySQL Server** и **Internet Information Services**.
 
@@ -46,7 +46,7 @@ PR состоит из трех основных частей:
 
 По данной таблице можно сделать вывод, об общей популярности личности, среди введенных в **"СЛ"**.
 
-**"ЕС"** - после выбора сайта и периода, формируется таблица из двух колонок, где «Дата» – дата обработки и «Количество новых страниц» - количество страниц всех элементов из СЛ по указанному сайту за указанный период.
+**"ЕС"** - после выбора сайта и периода, формируется список в виде открывающихся ячеек, отсортированных по дате. Каждая открытая ячейка включает в себя ** Имя ** и ** Ранг **.
 ![](https://github.com/SuperBugCompany/politrange/blob/master/admintool/screenshots/abdr_scr02.png)
 
 По желанию покупателя **"PR"**, разработчики могут расширить спектр аналитических отчетов, а также увеличить количество входных данных для анализа. Приобретя **"PR"**, Вы получаете поддержку и внедрение, напрямую от разработчика. Также ждем предложений, по улучшению продукта и сотрудничества.
